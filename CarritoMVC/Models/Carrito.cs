@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 using CarritoMVC.Helpers;
 
@@ -12,7 +13,7 @@ namespace CarritoMVC.Models
 
         public Cliente Cliente { get; set; }
 
-        public Compra Compra { get; set; }
+        //public Compra Compra { get; set; }
 
         public List<CarritoItem> CarritoItems { get; set; }
 

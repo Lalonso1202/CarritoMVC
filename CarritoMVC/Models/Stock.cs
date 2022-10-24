@@ -8,9 +8,9 @@ namespace CarritoMVC.Models
     {
         [Key]
         [Display(Name = Alias.StockId)]
-        public int IdSucursal { get; set; }
+        public int IdStock { get; set; }
 
-        public StockItem StockItem { get; set; }
+        //public StockItem StockItem { get; set; }
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         [StringLength(100, MinimumLength = 2, ErrorMessage = ErrorMsgs.StrMaxMin)]

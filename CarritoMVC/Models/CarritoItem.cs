@@ -1,5 +1,6 @@
 ﻿using CarritoMVC.Helpers;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace CarritoMVC.Models
@@ -10,7 +11,7 @@ namespace CarritoMVC.Models
         [Display(Name = Alias.CarritoItemId)]
         public int IdCarritoItem { get; set; }
 
-        [Key]
+        [ForeignKey("ProductoId")]
         [Display(Name = Alias.ProductoId)]
         public int IdProducto { get; set; }
 
@@ -25,13 +26,13 @@ namespace CarritoMVC.Models
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public int Subtotal { get; set; }
 
-        public CarritoItem(int idCarritoItem, int idProducto, double valorUnitario, int cantidad)
-        {
-            this.IdCarritoItem = idCarritoItem;
-            this.IdProducto = idProducto;
-            this.ValorUnitario = valorUnitario;
-            this.Cantidad = cantidad;
-            this.Subtotal = (int)(valorUnitario * cantidad);
-        }
+        //public CarritoItem(int idCarritoItem, int idProducto, double valorUnitario, int cantidad)
+        //{
+        //    this.IdCarritoItem = idCarritoItem;
+        //    this.IdProducto = idProducto;
+        //    this.ValorUnitario = valorUnitario;
+        //    this.Cantidad = cantidad;
+        //    this.Subtotal = (int)(valorUnitario * cantidad);
+        //}
     }
 }
