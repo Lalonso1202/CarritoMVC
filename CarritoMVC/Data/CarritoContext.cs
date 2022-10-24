@@ -18,9 +18,9 @@ namespace CarritoMVC.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
-        public DbSet<Producto> productos { get; set; }
+        public DbSet<Producto> Productos { get; set; }
         public DbSet<StockItem> StockItems { get; set; }
-        public DbSet<Sucursal> Sucursales { get; set; }
+        public DbSet<Stock> Stock { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
     }

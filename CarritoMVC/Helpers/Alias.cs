@@ -12,6 +12,6 @@
         public const string CompraId = "Compra";
         public const string EmpleadoId = "Empleado";
         public const string CategoriaId = "Categoria";
-        public const string SucursalId = "Sucursal";
+        public const string StockId = "Stock";
     }
 }

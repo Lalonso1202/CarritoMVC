@@ -8,14 +8,14 @@ namespace CarritoMVC.Models
     {
 
         [Key]
-        [Display(Name = Alias.SucursalId)]
-        public int IdSucursal;
+        [Display(Name = Alias.StockId)]
+        public int IdStock;
 
         [Key]
         [Display(Name = Alias.ProductoId)]
         public int IdProducto;
 
-        public Sucursal Sucursal { get; set; }
+        public Stock Stock { get; set; }
 
         public Producto Producto { get; set; }
 

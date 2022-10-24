@@ -4,10 +4,10 @@ using System.Xml.Linq;
 
 namespace CarritoMVC.Models
 {
-    public class Sucursal
+    public class Stock
     {
         [Key]
-        [Display(Name = Alias.SucursalId)]
+        [Display(Name = Alias.StockId)]
         public int IdSucursal { get; set; }
 
         public StockItem StockItem { get; set; }
