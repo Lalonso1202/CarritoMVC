@@ -10,6 +10,13 @@ namespace CarritoMVC.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+        }
+
         //Consultar sobre las funciones que crea en el video 19
 
         public DbSet<Carrito> Carritos { get; set; }
