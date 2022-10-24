@@ -13,5 +13,6 @@
         public const string EmpleadoId = "Empleado";
         public const string CategoriaId = "Categoria";
         public const string StockId = "Stock";
+        public const string StockItemId = "Stock Item";
     }
 }

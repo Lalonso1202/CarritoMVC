@@ -1,5 +1,6 @@
 ﻿using CarritoMVC.Helpers;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace CarritoMVC.Models
@@ -10,11 +11,11 @@ namespace CarritoMVC.Models
         [Display(Name = Alias.CompraId)]
         public int IdCompra { get; set; }
 
-        [Key]
+        [ForeignKey("ClienteId")]
         [Display(Name = Alias.ClienteId)]
         public int IdCliente { get; set; }
 
-        [Key]
+        [ForeignKey("CarritoId")]
         [Display(Name = Alias.CarritoId)]
         public int IdCarrito { get; set; }
 
