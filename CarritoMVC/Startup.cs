@@ -20,7 +20,7 @@ namespace CarritoMVC
         private static void ConfigureServices(WebApplicationBuilder builder)
         {
             // Add services to the container.
-            builder.Services.AddDbContext<CarritoContext>(options => options.UseInMemoryDatabase("CarritoDb"));
+            builder.Services.AddDbContext<CarritoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CarritoDBCS")));
             builder.Services.AddControllersWithViews();
         }
 
