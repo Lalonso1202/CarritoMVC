@@ -9888,11 +9888,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
+      "projectUniqueName": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
       "projectName": "CarritoMVC",
-      "projectPath": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
+      "projectPath": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
       "packagesPath": "C:\\Users\\Natalia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\obj\\",
+      "outputPath": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
