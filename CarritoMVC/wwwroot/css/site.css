@@ -1,11 +1,20 @@
+/*
+    Paleta:
+    scallop eggshell #E7D2CC
+    pewter #B9B7BD
+    gray #868B8E
+    ivory #EEEDE7
+*/
+
+
 html {
   font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
@@ -14,5 +23,41 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    background-color: #B9B7BD;
+}
+
+.form {
+    justify-content: center;
+    background-color: #EEEDE7;
+    margin:2em;
+    padding: 2em;
+    border-radius:10px;
+
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:400px;
+}
+
+.formItem {
+    margin: 1em;
+    padding: 1em;
+    position: relative;
+    border-bottom: 2px solid ##868B8E;
+
+}
+
+#registro {
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+form{
+    
+    box-sizing: border-box;
+
 }
