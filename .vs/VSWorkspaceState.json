@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\CarritoMVC",
-    "\\CarritoMVC\\Models"
+    "\\CarritoMVC\\Views",
+    "\\CarritoMVC\\Views\\Categorias"
   ],
-  "SelectedNode": "\\CarritoMVC\\Models\\Compra.cs",
+  "SelectedNode": "\\CarritoMVC\\Views\\Categorias\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
