@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CarritoMVC",
+    "\\CarritoMVC\\Models"
   ],
+  "SelectedNode": "\\CarritoMVC\\Models\\Compra.cs",
   "PreviewInSolutionExplorer": false
 }

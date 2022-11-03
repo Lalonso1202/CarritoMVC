@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CarritoMVC.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                 <a asp-action="Edit" asp-route-id="@item.Nombre">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Nombre">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Nombre">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Lista de Categorias
+            </h2>
+        </div>
+        <div class="col-6">
+            Crear nueva categoria
+        </div>
+    </div>
+    <br />
+
+    @if(Model.Count() > 0){
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre Categoria
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model){
+                    <tr>
+                        <th width= "50%">@item.Nombre</th>
+                        <th width="30%">@item.Descripcion</th>
+                        <th>
+                        
+                            <a asp-action="Edit" asp-route-id="@item.Nombre">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Nombre">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Nombre">Delete</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else{
+        <p> No hay registros de Categorias</p>
+    }
+    </div>
