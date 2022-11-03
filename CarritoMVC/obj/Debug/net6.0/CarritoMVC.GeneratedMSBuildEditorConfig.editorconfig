@@ -8,57 +8,57 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CarritoMVC
 build_property.RootNamespace = CarritoMVC
-build_property.ProjectDir = C:\Users\Natalia\Documents\ORT\1°año 2°cuatrimestre\PNT1\CarritoMVC\CarritoMVC\CarritoMVC\
+build_property.ProjectDir = /Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Natalia\Documents\ORT\1°año 2°cuatrimestre\PNT1\CarritoMVC\CarritoMVC\CarritoMVC
+build_property.MSBuildProjectDirectory = /Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Usuarios/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Usuarios/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Usuarios/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGVsZXRlLmNzaHRtbA==
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Usuarios/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Usuarios/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGV0YWlscy5jc2h0bWw=
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Usuarios/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Usuarios/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Usuarios/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Usuarios/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Usuarios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Natalia/Documents/ORT/1°año 2°cuatrimestre/PNT1/CarritoMVC/CarritoMVC/CarritoMVC/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-2dzh4vl2jt
+[/Users/michellerabinovich/Projects/CarritoMVC/CarritoMVC/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-nuh6sexuol
