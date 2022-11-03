@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uoHJqkWHNj496qMCq/42HzOojc3MLJAsDLLZoc5f5/hExoRiGE5BnsE5SKDyvm67etdN4vtPSCy7ftiU0If5Gw==",
+  "dgSpecHash": "1bP48TTi3EjlnnJP/O1+UmxXg0sULsBM35yZSZgqdOfybE7ZyrXhfNPD4lfs/e4HL9i/NKCRBdrqmEYnctC+Mw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
+  "projectFilePath": "C:\\Users\\Natalia\\Documents\\ORT\\1°año 2°cuatrimestre\\PNT1\\CarritoMVC\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Natalia\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Natalia\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

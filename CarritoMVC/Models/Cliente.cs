@@ -11,23 +11,13 @@ namespace CarritoMVC.Models
         {
         }
 
-        [Key]
-        [Display(Name = Alias.ClienteId)]
-        public int IdCliente { get; set; }
-
-        [ForeignKey("UsuarioId")]
-        [Display(Name = Alias.UsuarioId)]
-        public int IdUsuario { get; set; }
-
         [ForeignKey("CarritoId")]
         [Display(Name = Alias.CarritoId)]
         public int CarritoId { get; set; }
 
         public Carrito Carrito { get; set; }
 
-        public List<Compra> Compra { get; set; }
-
-        public Usuario Usuario { get; set; }
+        //public List<Compra> Compra { get; set; }
 
         [Required]
         [Phone]
