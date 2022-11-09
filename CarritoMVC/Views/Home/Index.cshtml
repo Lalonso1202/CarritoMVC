@@ -1,8 +1,176 @@
 ﻿@{ 
     ViewData["Title"] = "Home Page";
 }
+@{
+    Layout = null;
+}
+    <meta charset="UTF-8">
+    <title>Tienda Online</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/estilos.css">
+    <script src="/js/slider.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <header class="main-header">
+        <div class="container container--flex">
+            <div class="main-header__container">
+                <h1 class="main-header__title">MI TIENDA DE ROPA</h1>
+                <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+                <nav class="main-nav" id="main-nav">
+                    <ul class="menu">
+                    <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
+                        <li class="menu__item"><a href="" class="menu__link">SOBRE NOSOTROS</a></li>
+                    <li class="menu__item"><a asp-area="" asp-controller="Productos" asp-action="Index" class="menu__link">TIENDA</a></li>
+                        <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="main-header__container">
+                <span class="main-header__txt">Necesitas Ayuda?</span>
+                <p class="main-header__txt"><i class="fas fa-phone"></i> Contactarse con 12345678099</p>
+            </div>
+            <div class="main-header__container">
+                <a href="" class="main-header__link"><i class="fas fa-user"></i></a>
+                <a href="" class="main-header__btn">Mi Carrito <i class="fa-solid fa-cart-shopping"></i></a>
+                <input type="search" class="main-header__input" placeholder="Buscar productos"><i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+    <div class="container-slider">
+        <div class="slider" id="slider">
+            <div class="slider__section">
+                <img src="img/foto1.jpg" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">Informacion de producto</h2>
+                    <p class="slider__txt">algunos datos</p>
+                    <a href="" class="btn-shop">COMPRAR</a>
+                </div>
+            </div>
+            <div class="slider__section">
+                <img src="img/foto2.jpg" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">Informacion de producto</h2>
+                    <p class="slider__txt">algunos datos</p>
+                    <a href="" class="btn-shop">COMPRAR</a>
+                </div>
+            </div>
+            <div class="slider__section">
+                <img src="img/foto3.jpg" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">Informacion de producto</h2>
+                    <p class="slider__txt">algunos datos</p>
+                    <a href="" class="btn-shop">COMPRAR</a>
+                </div>
+            </div>
+            <div class="slider__section">
+                <img src="img/foto4.jpg" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">Informacion de producto</h2>
+                    <p class="slider__txt">algunos datos</p>
+                    <a href="" class="btn-shop">COMPRAR</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider__btn slider__btn--right" id="btn-right">&#62;</div>
+        <div class="slider__btn slider__btn--left" id="btn-left">&#60;</div>
+    </div>
+    <main class="main">
+        <div class="container">
+            <h2 class="main-title">Nuevos Productos (puede no estar)</h2>
+            <section class="container-products">
+                <div class="product">
+                    <img src="img/pantalon.jpg" alt="" class="product__img">
+                    <div class="product__description">
+                        <h3 class="product__title">Datos del producto</h3>
+                        <span class="product__price">$575.00</span>
+                    </div>
+                    <i class="product__icon fas fa-cart-plus"></i>
+                </div>
+                <div class="product">
+                    <img src="img/camisa.jpg" alt="" class="product__img">
+                    <div class="product__description">
+                        <h3 class="product__title">Datos del producto</h3>
+                        <span class="product__price">$575.00</span>
+                    </div>
+                    <i class="product__icon fas fa-cart-plus"></i>
+                </div>
+                <div class="product">
+                    <img src="img/camisa manga corta.jpg" alt="" class="product__img">
+                    <div class="product__description">
+                        <h3 class="product__title">Datos del producto</h3>
+                        <span class="product__price">$575.00</span>
+                    </div>
+                    <i class="product__icon fas fa-cart-plus"></i>
+                </div>
+                <div class="product">
+                    <img src="img/producto.jpg" alt="" class="product__img">
+                    <div class="product__description">
+                        <h3 class="product__title">Datos del producto</h3>
+                        <span class="product__price">$325.00</span>
+                    </div>
+                    <i class="product__icon fas fa-cart-plus"></i>
+                </div>
+            </section>
+            <section class="container__testimonials">
+                <h2 class="section__title">Testimonios (puede o no estar esta seccion)</h2>
+                <h3 class="testimonial__title">Anamaria </h3>
+                <p class="testimonial__txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, perferendis, animi! Numquam quasi similique, fuga sint. Nulla veritatis quia nemo, magni, necessitatibus impedit inventore, provident culpa repellat esse a quo.</p>
+            </section>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+            <div class="container-editor">
+                <div class="editor__item">
+                    <img src="img/item.jpg" alt="" class="editor__img">
+                    <p class="editor__circle">EXPRESS YOUR STYLE NOW</p>
+                </div>
+                <div class="editor__item">
+                    <img src="img/producto 2.jpg" alt="" class="editor__img">
+                    <p class="editor__circle">EXPRESS YOUR STYLE NOW</p>
+                </div>
+            </div>
+            <section class="container-tips">
+                <div class="tip">
+                    <i class="far fa-hand-paper"></i>
+                    <h2 class="tip__title">Satisfaccion Garantizada</h2>
+                    <p class="tip__txt">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit</p>
+                <a asp-controller="Productos" asp-action="Index" class="btn-shop">COMPRAR</a>
+                </div>
+                <div class="tip">
+                    <i class="fas fa-rocket"></i>
+                    <h2 class="tip__title">Envios Rapidos</h2>
+                    <p class="tip__txt">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                <a asp-controller="Productos" asp-action="Index" class="btn-shop">COMPRAR</a>
+                </div>
+                <div class="tip">
+                    <i class="fas fa-cog"></i>
+                    <h2 class="tip__title">Ropa de Calidad</h2>
+                    <p class="tip__txt">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                    <a asp-controller="Productos" asp-action="Index" class="btn-shop">COMPRAR</a>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="main-footer">
+        <div class="footer__section">
+            <h2 class="footer__title">Sobre Nosotros</h2>
+            <p class="footer__txt">Curabitur non nulla sit amet nislinit tempus convallis quis ac lectus. lac inia eget consectetur sed, convallis at tellus. Nulla porttitor accumsana tincidunt.</p>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Ubicacion :</h2>
+            <p class="footer__txt">Yatay 240 - CABA </p>
+            <h2 class="footer__title">Contacto</h2>
+            <p class="footer__txt">Whatsapp : +54 011 xxxx xxxx</p>
+            <p class="footer__txt">Email : info@ejemplo.com</p>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Links Rapidos</h2>
+            <a href="" class="footer__link">Inico</a>
+            <a href="" class="footer__link">Sobre Nosotros</a>
+            <a href="" class="footer__link">Tienda</a>
+            <a href="" class="footer__link">Contacto Us</a>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Suscribite para Recibir Ofertas</h2>
+            <p class="footer__txt">Al suscribirse a nuestra lista de correo, siempre recibirá nuestras últimas noticias y actualizaciones.</p>
+            <input type="email" class="footer__input" placeholder="Enter your email">
+        </div>
+        <p class="copy">© 2022 MI TIENDA DE ROPA. Todos los derechos Reservados</p>
+    </footer>
