@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/CarritoMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <!--
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -29,6 +31,39 @@
                 </div>
             </div>
         </nav>
+    </header>
+    -->
+    <meta charset="UTF-8">
+    <title>Tienda Online</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/estilos.css">
+    <script src="/js/slider.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+   
+    <header class="main-header">
+        <div class="container container--flex">
+            <div class="main-header__container">
+                <h1 class="main-header__title">MI TIENDA DE ROPA</h1>
+                <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+                <nav class="main-nav" id="main-nav">
+                    <ul class="menu">
+                    <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
+                        <li class="menu__item"><a href="" class="menu__link">SOBRE NOSOTROS</a></li>
+                    <li class="menu__item"><a asp-area="" asp-controller="Productos" asp-action="Index" class="menu__link">TIENDA</a></li>
+                        <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="main-header__container">
+                <span class="main-header__txt">Necesitas Ayuda?</span>
+                <p class="main-header__txt"><i class="fas fa-phone"></i> Contactarse con 12345678099</p>
+            </div>
+            <div class="main-header__container">
+                <a href="" class="main-header__link"><i class="fas fa-user"></i></a>
+                <a href="" class="main-header__btn">Mi Carrito <i class="fa-solid fa-cart-shopping"></i></a>
+                <input type="search" class="main-header__input" placeholder="Buscar productos"><i class="fas fa-search"></i>
+            </div>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">

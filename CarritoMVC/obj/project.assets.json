@@ -10508,19 +10508,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\54117\\.nuget\\packages\\": {}
+    "C:\\Users\\Melu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\54117\\Source\\Repos\\Lalonso1202\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
+      "projectUniqueName": "C:\\pntNoviembre\\CarritoMVC\\CarritoMVC.csproj",
       "projectName": "CarritoMVC",
-      "projectPath": "C:\\Users\\54117\\Source\\Repos\\Lalonso1202\\CarritoMVC\\CarritoMVC\\CarritoMVC.csproj",
-      "packagesPath": "C:\\Users\\54117\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\54117\\Source\\Repos\\Lalonso1202\\CarritoMVC\\CarritoMVC\\obj\\",
+      "projectPath": "C:\\pntNoviembre\\CarritoMVC\\CarritoMVC.csproj",
+      "packagesPath": "C:\\Users\\Melu\\.nuget\\packages\\",
+      "outputPath": "C:\\pntNoviembre\\CarritoMVC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\54117\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Melu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10600,7 +10600,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
