@@ -18,7 +18,7 @@
                 <nav class="main-nav" id="main-nav">
                     <ul class="menu">
                     <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
-                        <li class="menu__item"><a href="" class="menu__link">SOBRE NOSOTROS</a></li>
+                        <li class="menu__item"><a href=#sobreNosotros class="menu__link">SOBRE NOSOTROS</a></li>
                     <li class="menu__item"><a asp-area="" asp-controller="Productos" asp-action="Index" class="menu__link">TIENDA</a></li>
                         <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
                     </ul>
@@ -31,7 +31,7 @@
             <div class="main-header__container">
                 <a href="" class="main-header__link"><i class="fas fa-user"></i></a>
                 <a href="" class="main-header__btn">Mi Carrito <i class="fa-solid fa-cart-shopping"></i></a>
-                <input type="search" class="main-header__input" placeholder="Buscar productos"><i class="fas fa-search"></i>
+                <!-- </><input type="search" class="main-header__input" placeholder="Buscar productos"><i class="fas fa-search"></i>-->
             </div>
         </div>
     </header>
@@ -110,9 +110,9 @@
                     <i class="product__icon fas fa-cart-plus"></i>
                 </div>
             </section>
-            <section class="container__testimonials">
-                <h2 class="section__title">Testimonios (puede o no estar esta seccion)</h2>
-                <h3 class="testimonial__title">Anamaria </h3>
+            <section class="container__testimonials" id="sobreNosotros">
+                <h2 class="section__title">Sobre nosotros</h2>
+                <h3 class="testimonial__title">Nuestra marca </h3>
                 <p class="testimonial__txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, perferendis, animi! Numquam quasi similique, fuga sint. Nulla veritatis quia nemo, magni, necessitatibus impedit inventore, provident culpa repellat esse a quo.</p>
             </section>
 
