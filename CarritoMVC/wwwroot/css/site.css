@@ -16,3 +16,33 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form {
+    justify-content: center;
+    background-color: #EEEDE7;
+    margin: 2em;
+    padding: 2em;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
+
+.formItem {
+    margin: 1em;
+    padding: 1em;
+    position: relative;
+    border-bottom: 2px solid ##868B8E;
+}
+
+#registro {
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+form {
+    box-sizing: border-box;
+}
