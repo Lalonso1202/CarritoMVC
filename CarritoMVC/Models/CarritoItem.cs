@@ -9,11 +9,11 @@ namespace CarritoMVC.Models
     {
         [Key]
         [Display(Name = Alias.CarritoItemId)]
-        public int IdCarritoItem { get; set; }
+        public int CarritoItemId { get; set; }
 
-        [ForeignKey("ProductoId")]
-        [Display(Name = Alias.ProductoId)]
-        public int IdProducto { get; set; }
+        //[ForeignKey("ProductoId")]
+        //[Display(Name = Alias.ProductoId)]
+        //public int ProductoId { get; set; }
 
         public Producto Producto { get; set; }
 

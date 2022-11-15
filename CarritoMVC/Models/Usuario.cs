@@ -7,9 +7,9 @@ namespace CarritoMVC.Models
 {
     public abstract class Usuario
     {
-        [Key]
+        //[Key]
         //[NotMapped]
-        public int Id { get; set; }
+       // public int UsuarioId { get; set; }
 
 
         //public Cliente Cliente { get; set; }
@@ -55,13 +55,6 @@ namespace CarritoMVC.Models
         public String Password { get; set; }
 
 
-        public Usuario(int id, string nombre, string email, string password)
-        {
-            this.Id = id;
-            this.Nombre = nombre;
-            this.Email = email;
-            this.FechaAlta = DateTime.Now;
-            this.Password = password;
-        }
+       
     }
 }

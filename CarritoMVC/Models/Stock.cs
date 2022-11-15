@@ -7,8 +7,7 @@ namespace CarritoMVC.Models
     public class Stock
     {
         [Key]
-        [Display(Name = Alias.StockId)]
-        public int IdStock { get; set; }
+        public int StockId { get; set; }
 
         //public StockItem StockItem { get; set; }
 

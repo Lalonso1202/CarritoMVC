@@ -22,8 +22,7 @@ namespace CarritoMVC.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            var carritoContext = _context.Clientes.Include(c => c.Carrito);
-            return View(await carritoContext.ToListAsync());
+              return View(await _context.Clientes.ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -35,8 +34,7 @@ namespace CarritoMVC.Controllers
             }
 
             var cliente = await _context.Clientes
-                .Include(c => c.Carrito)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -48,7 +46,6 @@ namespace CarritoMVC.Controllers
         // GET: Clientes/Create
         public IActionResult Create()
         {
-            ViewData["CarritoId"] = new SelectList(_context.Carritos, "IdCarrito", "IdCarrito");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarritoId,Telefono,Direccion,Id,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("ClienteId,Telefono,Direccion,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace CarritoMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarritoId"] = new SelectList(_context.Carritos, "IdCarrito", "IdCarrito", cliente.CarritoId);
             return View(cliente);
         }
 
@@ -82,7 +78,6 @@ namespace CarritoMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarritoId"] = new SelectList(_context.Carritos, "IdCarrito", "IdCarrito", cliente.CarritoId);
             return View(cliente);
         }
 
@@ -91,9 +86,9 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarritoId,Telefono,Direccion,Id,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Telefono,Direccion,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Cliente cliente)
         {
-            if (id != cliente.Id)
+            if (id != cliente.ClienteId)
             {
                 return NotFound();
             }
@@ -107,7 +102,7 @@ namespace CarritoMVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
+                    if (!ClienteExists(cliente.ClienteId))
                     {
                         return NotFound();
                     }
@@ -118,7 +113,6 @@ namespace CarritoMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarritoId"] = new SelectList(_context.Carritos, "IdCarrito", "IdCarrito", cliente.CarritoId);
             return View(cliente);
         }
 
@@ -131,8 +125,7 @@ namespace CarritoMVC.Controllers
             }
 
             var cliente = await _context.Clientes
-                .Include(c => c.Carrito)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -162,7 +155,7 @@ namespace CarritoMVC.Controllers
 
         private bool ClienteExists(int id)
         {
-          return _context.Clientes.Any(e => e.Id == id);
+          return _context.Clientes.Any(e => e.ClienteId == id);
         }
     }
 }

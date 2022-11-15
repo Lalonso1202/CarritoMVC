@@ -26,7 +26,7 @@ namespace CarritoMVC.Controllers
         }
 
         // GET: Categorias/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Categorias == null)
             {
@@ -34,7 +34,7 @@ namespace CarritoMVC.Controllers
             }
 
             var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.Nombre == id);
+                .FirstOrDefaultAsync(m => m.CategoriaId == id);
             if (categoria == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,Descripcion")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("CategoriaId,Descripcion")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace CarritoMVC.Controllers
         }
 
         // GET: Categorias/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Categorias == null)
             {
@@ -86,9 +86,9 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Nombre,Descripcion")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoriaId,Descripcion")] Categoria categoria)
         {
-            if (id != categoria.Nombre)
+            if (id != categoria.CategoriaId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace CarritoMVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaExists(categoria.Nombre))
+                    if (!CategoriaExists(categoria.CategoriaId))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace CarritoMVC.Controllers
         }
 
         // GET: Categorias/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categorias == null)
             {
@@ -125,7 +125,7 @@ namespace CarritoMVC.Controllers
             }
 
             var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.Nombre == id);
+                .FirstOrDefaultAsync(m => m.CategoriaId == id);
             if (categoria == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace CarritoMVC.Controllers
         // POST: Categorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Categorias == null)
             {
@@ -153,9 +153,9 @@ namespace CarritoMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaExists(string id)
+        private bool CategoriaExists(int id)
         {
-          return _context.Categorias.Any(e => e.Nombre == id);
+          return _context.Categorias.Any(e => e.CategoriaId == id);
         }
     }
 }

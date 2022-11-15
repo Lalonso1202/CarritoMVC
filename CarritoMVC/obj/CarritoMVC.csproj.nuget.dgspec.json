@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\pntNoviembre\\CarritoMVC\\CarritoMVC.csproj": {}
+    "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\CarritoMVC.csproj": {}
   },
   "projects": {
-    "C:\\pntNoviembre\\CarritoMVC\\CarritoMVC.csproj": {
+    "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\CarritoMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\pntNoviembre\\CarritoMVC\\CarritoMVC.csproj",
+        "projectUniqueName": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\CarritoMVC.csproj",
         "projectName": "CarritoMVC",
-        "projectPath": "C:\\pntNoviembre\\CarritoMVC\\CarritoMVC.csproj",
-        "packagesPath": "C:\\Users\\Melu\\.nuget\\packages\\",
-        "outputPath": "C:\\pntNoviembre\\CarritoMVC\\obj\\",
+        "projectPath": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\CarritoMVC.csproj",
+        "packagesPath": "C:\\Users\\agusk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Melu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\agusk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

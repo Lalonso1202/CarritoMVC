@@ -8,23 +8,23 @@ namespace CarritoMVC.Models
     public class StockItem
     {
         [Key]
-        [Display(Name =Alias.StockItemId)]
         public int StockItemId { get; set; }
 
         //[Key]
         //[Display(Name = Alias.StockItemId)]
         //public int IdStockItem;
 
-        [ForeignKey("ProductoId")]
-        [Display(Name = Alias.ProductoId)]
-        public int IdProducto;
+        //[ForeignKey("ProductoId")]
+       // [Display(Name = Alias.ProductoId)]
+       // public int ProductoId;
 
+        public Producto Producto { get; set; }
         public Stock Stock { get; set; }
 
         //public Producto Producto { get; set; }
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
 
-        public int Cantidad;
+        public int Cantidad { get; set; }
     }
 }

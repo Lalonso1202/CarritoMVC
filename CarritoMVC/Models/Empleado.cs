@@ -7,9 +7,9 @@ namespace CarritoMVC.Models
 {
     public class Empleado : Usuario
     {
-        public Empleado(int id, string nombre, string email, string password) : base(id, nombre, email, password)
-        {
-        }
+        
+        public int EmpleadoId { get; set; }
+        //public int UsuarioId { get; set; }
 
         [Required]
         [Phone]

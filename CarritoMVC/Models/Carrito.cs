@@ -7,10 +7,15 @@ namespace CarritoMVC.Models
 {
     public class Carrito
     {
-        [Key]
-        [Display(Name = Alias.CarritoId)]
-        public int IdCarrito { get; set; }
+        //[Key]
+        //[Display(Name = Alias.CarritoId)]
+        public int CarritoId { get; set; }
 
+        //public int UsuarioId { get; set; }
+
+        //[ForeignKey("Cliente")]
+        //[Display(Name = Alias.CarritoId)]
+        public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
         //public Compra Compra { get; set; }
