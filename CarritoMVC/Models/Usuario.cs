@@ -7,13 +7,7 @@ namespace CarritoMVC.Models
 {
     public abstract class Usuario
     {
-        //[Key]
-        //[NotMapped]
-       // public int UsuarioId { get; set; }
-
-
-        //public Cliente Cliente { get; set; }
-        //public Empleado Empleado { get; set; }
+       
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         [StringLength(100, MinimumLength = 2, ErrorMessage = ErrorMsgs.StrMaxMin)]

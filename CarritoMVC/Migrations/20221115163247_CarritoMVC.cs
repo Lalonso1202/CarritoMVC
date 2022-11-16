@@ -82,11 +82,11 @@ namespace CarritoMVC.Migrations
                 name: "Productos",
                 columns: table => new
                 {
-                    IdCategoria = table.Column<int>(type: "int", nullable: false)
+                    ProductoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
                     Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrecioVigente = table.Column<double>(type: "float", nullable: false),
                     Activo = table.Column<bool>(type: "bit", nullable: false),
@@ -94,7 +94,7 @@ namespace CarritoMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Productos", x => x.IdCategoria);
+                    table.PrimaryKey("PK_Productos", x => x.ProductoId);
                     table.ForeignKey(
                         name: "FK_Productos_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
@@ -130,7 +130,7 @@ namespace CarritoMVC.Migrations
                 {
                     StockItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductoIdCategoria = table.Column<int>(type: "int", nullable: false),
+                    ProductoId = table.Column<int>(type: "int", nullable: false),
                     StockId = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false)
                 },
@@ -138,10 +138,10 @@ namespace CarritoMVC.Migrations
                 {
                     table.PrimaryKey("PK_StockItems", x => x.StockItemId);
                     table.ForeignKey(
-                        name: "FK_StockItems_Productos_ProductoIdCategoria",
-                        column: x => x.ProductoIdCategoria,
+                        name: "FK_StockItems_Productos_ProductoId",
+                        column: x => x.ProductoId,
                         principalTable: "Productos",
-                        principalColumn: "IdCategoria",
+                        principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StockItems_Stocks_StockId",
@@ -157,7 +157,7 @@ namespace CarritoMVC.Migrations
                 {
                     CarritoItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductoIdCategoria = table.Column<int>(type: "int", nullable: false),
+                    ProductoId = table.Column<int>(type: "int", nullable: false),
                     ValorUnitario = table.Column<double>(type: "float", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Subtotal = table.Column<int>(type: "int", nullable: false),
@@ -172,10 +172,10 @@ namespace CarritoMVC.Migrations
                         principalTable: "Carritos",
                         principalColumn: "CarritoId");
                     table.ForeignKey(
-                        name: "FK_CarritoItems_Productos_ProductoIdCategoria",
-                        column: x => x.ProductoIdCategoria,
+                        name: "FK_CarritoItems_Productos_ProductoId",
+                        column: x => x.ProductoId,
                         principalTable: "Productos",
-                        principalColumn: "IdCategoria",
+                        principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -205,9 +205,9 @@ namespace CarritoMVC.Migrations
                 column: "CarritoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarritoItems_ProductoIdCategoria",
+                name: "IX_CarritoItems_ProductoId",
                 table: "CarritoItems",
-                column: "ProductoIdCategoria");
+                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carritos_ClienteId",
@@ -225,9 +225,9 @@ namespace CarritoMVC.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StockItems_ProductoIdCategoria",
+                name: "IX_StockItems_ProductoId",
                 table: "StockItems",
-                column: "ProductoIdCategoria");
+                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StockItems_StockId",

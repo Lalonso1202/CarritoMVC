@@ -3,43 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CarritoMVC</title>
+    <title>Tienda Online</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CarritoMVC.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <!--
-
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CarritoMVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    -->
-    <meta charset="UTF-8">
-    <title>Tienda Online</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="/css/estilos.css">
-    <script src="/js/site.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-   
+    <script src="/js/site.js"></script>
+    <link rel="stylesheet" href="/css/estilos.css">
+
+</head>
+<body>    
     <header class="main-header">
         <div class="container container--flex">
             <div class="main-header__container">
@@ -49,7 +22,7 @@
                     <ul class="menu">
                     <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
                         <li class="menu__item"><a href="/Home#sobreNosotros" class="menu__link">SOBRE NOSOTROS</a></li>
-                    <li class="menu__item"><a asp-area="" asp-controller="Productos" asp-action="Index" class="menu__link">TIENDA</a></li>
+                    <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Tienda" class="menu__link">TIENDA</a></li>
                         <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
                     </ul>
                 </nav>
@@ -59,7 +32,7 @@
                 <p class="main-header__txt"><i class="fas fa-phone"></i> Contactarse con 12345678099</p>
             </div>
             <div class="main-header__container">
-                <a href="" class="main-header__link"><i class="fas fa-user"></i></a>
+                <a asp-area="" asp-controller="Home" asp-action="Login" class="main-header__link"><i class="fas fa-user"></i></a>
                 <a href="" class="main-header__btn">Mi Carrito <i class="fa-solid fa-cart-shopping"></i></a>
             </div>
         </div>

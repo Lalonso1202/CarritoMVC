@@ -9,10 +9,9 @@ namespace CarritoMVC.Models
     {
         
         public int EmpleadoId { get; set; }
-        //public int UsuarioId { get; set; }
 
         [Required]
-        [Phone]
+        
         public int Telefono { get; set; }
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]

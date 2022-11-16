@@ -6,10 +6,9 @@ namespace CarritoMVC.Models
 {
     public class Stock
     {
-        [Key]
         public int StockId { get; set; }
 
-        //public StockItem StockItem { get; set; }
+        
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         [StringLength(100, MinimumLength = 2, ErrorMessage = ErrorMsgs.StrMaxMin)]

@@ -60,7 +60,7 @@ namespace CarritoMVC.Migrations
                     b.Property<int?>("CarritoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductoIdCategoria")
+                    b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Subtotal")
@@ -73,7 +73,7 @@ namespace CarritoMVC.Migrations
 
                     b.HasIndex("CarritoId");
 
-                    b.HasIndex("ProductoIdCategoria");
+                    b.HasIndex("ProductoId");
 
                     b.ToTable("CarritoItems");
                 });
@@ -204,11 +204,11 @@ namespace CarritoMVC.Migrations
 
             modelBuilder.Entity("CarritoMVC.Models.Producto", b =>
                 {
-                    b.Property<int>("IdCategoria")
+                    b.Property<int>("ProductoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoId"), 1L, 1);
 
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
@@ -229,12 +229,13 @@ namespace CarritoMVC.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<double>("PrecioVigente")
                         .HasColumnType("float");
 
-                    b.HasKey("IdCategoria");
+                    b.HasKey("ProductoId");
 
                     b.HasIndex("CategoriaId");
 
@@ -281,7 +282,7 @@ namespace CarritoMVC.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductoIdCategoria")
+                    b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<int>("StockId")
@@ -289,7 +290,7 @@ namespace CarritoMVC.Migrations
 
                     b.HasKey("StockItemId");
 
-                    b.HasIndex("ProductoIdCategoria");
+                    b.HasIndex("ProductoId");
 
                     b.HasIndex("StockId");
 
@@ -315,7 +316,7 @@ namespace CarritoMVC.Migrations
 
                     b.HasOne("CarritoMVC.Models.Producto", "Producto")
                         .WithMany()
-                        .HasForeignKey("ProductoIdCategoria")
+                        .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -348,7 +349,7 @@ namespace CarritoMVC.Migrations
                 {
                     b.HasOne("CarritoMVC.Models.Producto", "Producto")
                         .WithMany()
-                        .HasForeignKey("ProductoIdCategoria")
+                        .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
