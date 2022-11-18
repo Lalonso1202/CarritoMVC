@@ -28,19 +28,27 @@ namespace CarritoMVC.Controllers
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Clientes == null)
+                {
+                    return NotFound();
+                }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ClienteId == id);
-            if (cliente == null)
+                var cliente = await _context.Clientes
+                    .FirstOrDefaultAsync(m => m.ClienteId == id);
+                if (cliente == null)
+                {
+                    return NotFound();
+                }
+
+                return View(cliente);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(cliente);
+            
         }
 
         // GET: Clientes/Create
@@ -58,28 +66,58 @@ namespace CarritoMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                Carrito c = new Carrito();
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cliente);
-        }
+                if (!yaExiste(cliente.Email))
+                {
+                    HttpContext.Session.SetString("ClienteId", cliente.ClienteId.ToString());
+                    HttpContext.Session.SetString("NombreCompleto", cliente.NombreCompleto);
+                    HttpContext.Session.SetString("Admin", false.ToString());
+                    _context.Add(cliente);
 
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Msg = "Ya se encuentra registrado ese mail";
+                    return View("Create");
+                }
+               
+            }
+            return RedirectToAction("Home","Index");
+        }
+        public Boolean yaExiste(String email)
+        {
+            Boolean existe = false;
+            var queryCliente = _context.Clientes.Where(e => e.Email.Equals(email)).FirstOrDefault();
+            if(queryCliente != null)
+            {
+                existe = true;
+            }
+
+            return existe;
+        }
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Clientes == null)
+                {
+                    return NotFound();
+                }
 
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
+                var cliente = await _context.Clientes.FindAsync(id);
+                if (cliente == null)
+                {
+                    return NotFound();
+                }
+                return View(cliente);
             }
-            return View(cliente);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // POST: Clientes/Edit/5
@@ -89,50 +127,66 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Telefono,Direccion,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Cliente cliente)
         {
-            if (id != cliente.ClienteId)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id != cliente.ClienteId)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClienteExists(cliente.ClienteId))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(cliente);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ClienteExists(cliente.ClienteId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                return View(cliente);
             }
-            return View(cliente);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Clientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Clientes == null)
+                {
+                    return NotFound();
+                }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ClienteId == id);
-            if (cliente == null)
+                var cliente = await _context.Clientes
+                    .FirstOrDefaultAsync(m => m.ClienteId == id);
+                if (cliente == null)
+                {
+                    return NotFound();
+                }
+
+                return View(cliente);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(cliente);
+            
         }
 
         // POST: Clientes/Delete/5
@@ -140,20 +194,41 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Clientes == null)
+            if (Login())
             {
-                return Problem("Entity set 'CarritoContext.Clientes'  is null.");
+                if (_context.Clientes == null)
+                {
+                    return Problem("Entity set 'CarritoContext.Clientes'  is null.");
+                }
+                var cliente = await _context.Clientes.FindAsync(id);
+                if (cliente != null)
+                {
+                    _context.Clientes.Remove(cliente);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente != null)
+            else
             {
-                _context.Clientes.Remove(cliente);
+                return RedirectToAction("Index", "Home");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+           
         }
 
+        public bool Login()
+        {
+            bool l;
+            if (HttpContext.Session.GetString("ClienteId") != null)
+            {
+                l = true;
+            }
+            else
+            {
+                l = false;
+            }
+            return l;
+        }
         private bool ClienteExists(int id)
         {
           return _context.Clientes.Any(e => e.ClienteId == id);

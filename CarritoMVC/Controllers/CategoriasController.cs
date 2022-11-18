@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarritoMVC.Data;
 using CarritoMVC.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace CarritoMVC.Controllers
 {
@@ -22,31 +23,55 @@ namespace CarritoMVC.Controllers
         // GET: Categorias
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Categorias.ToListAsync());
+            if (Login())
+            {
+                return View(await _context.Categorias.ToListAsync());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+             
         }
 
         // GET: Categorias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categorias == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Categorias == null)
+                {
+                    return NotFound();
+                }
 
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.CategoriaId == id);
-            if (categoria == null)
+                var categoria = await _context.Categorias
+                    .FirstOrDefaultAsync(m => m.CategoriaId == id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+
+                return View(categoria);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(categoria);
+            
         }
 
         // GET: Categorias/Create
         public IActionResult Create()
         {
-            return View();
+            if (Login())
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // POST: Categorias/Create
@@ -56,29 +81,45 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoriaId,Descripcion")] Categoria categoria)
         {
-            if (ModelState.IsValid)
+            if (Login())
             {
-                _context.Add(categoria);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(categoria);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(categoria);
             }
-            return View(categoria);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Categorias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categorias == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Categorias == null)
+                {
+                    return NotFound();
+                }
 
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
-            {
-                return NotFound();
+                var categoria = await _context.Categorias.FindAsync(id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+                return View(categoria);
             }
-            return View(categoria);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // POST: Categorias/Edit/5
@@ -88,50 +129,66 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CategoriaId,Descripcion")] Categoria categoria)
         {
-            if (id != categoria.CategoriaId)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id != categoria.CategoriaId)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(categoria);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaExists(categoria.CategoriaId))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(categoria);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!CategoriaExists(categoria.CategoriaId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                return View(categoria);
             }
-            return View(categoria);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Categorias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categorias == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Categorias == null)
+                {
+                    return NotFound();
+                }
 
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.CategoriaId == id);
-            if (categoria == null)
+                var categoria = await _context.Categorias
+                    .FirstOrDefaultAsync(m => m.CategoriaId == id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+
+                return View(categoria);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(categoria);
+           
         }
 
         // POST: Categorias/Delete/5
@@ -139,23 +196,46 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categorias == null)
+            if (Login())
             {
-                return Problem("Entity set 'CarritoContext.Categorias'  is null.");
+                if (_context.Categorias == null)
+                {
+                    return Problem("Entity set 'CarritoContext.Categorias'  is null.");
+                }
+                var categoria = await _context.Categorias.FindAsync(id);
+                if (categoria != null)
+                {
+                    _context.Categorias.Remove(categoria);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria != null)
+            else
             {
-                _context.Categorias.Remove(categoria);
+                return RedirectToAction("Index", "Home");
             }
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool CategoriaExists(int id)
         {
           return _context.Categorias.Any(e => e.CategoriaId == id);
+        }
+
+
+        public bool Login()
+        {
+            bool l;
+            if (HttpContext.Session.GetString("EmpleadoId") != null && HttpContext.Session.GetString("Admin") == true.ToString())
+            {
+                l = true;
+            }
+            else
+            {
+                l = false;
+            }
+            return l;
         }
     }
 }

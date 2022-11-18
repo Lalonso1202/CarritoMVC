@@ -1,10 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Http
 @{
     String nombreCompleto = null;
+    String admin = null;
+    String idCliente = null;
+    String idEmpleado = null;
     var valor = Context.Session.GetString("NombreCompleto");
+    var valorAdmin = Context.Session.GetString("Admin");
+    var valorIdEmpleado = Context.Session.GetString("EmpleadoId");
+    var valorIdCliente = Context.Session.GetString("ClienteId");
     if (valor != null)
     {
         nombreCompleto = Context.Session.GetString("NombreCompleto").ToString();
+    }
+    if (valorAdmin == true.ToString()){
+        admin = Context.Session.GetString("Admin").ToString();
+        idEmpleado = Context.Session.GetString("EmpleadoId");
+    }else{
+        idCliente = Context.Session.GetString("ClienteId");
     }
     
 }
@@ -58,14 +70,19 @@
                              @nombreCompleto
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                            @if(admin == true.ToString()){
+                                <li><a class="dropdown-item" asp-controller="Empleados" asp-action="Details" asp-route-id="@idEmpleado"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                            }else{
+                                <li><a class="dropdown-item" asp-controller="Clientes" asp-action="Details" asp-route-id="@idCliente"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                            }
+                            
                             <li><a class="dropdown-item" href="#"><i class="fa-solid fa-cart-shopping"></i> Mi Carrito </a></li>
                             <li><a class="dropdown-item" asp-controller="Home" asp-action="cerrarSesion"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                    @*<a asp-area="" asp-controller="" asp-action="" class="main-header__link"><i style="font-size: 15px;" class="fas fa-user"></i></a>*@
                 }else{
-                    <a asp-area="" asp-controller="Home" asp-action="Login" class="main-header__link"><i class="fas fa-user"></i></a>
+                    <a asp-area="" asp-controller="Home" asp-action="Login" class="main-header__link"><i style="font-size: 18px" class="fas fa-user"></i></a>
                 }
                     
                    

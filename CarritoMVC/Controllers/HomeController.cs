@@ -40,7 +40,7 @@ namespace CarritoMVC.Controllers
         {
             HttpContext.Session.SetString("EmpleadoId", "0");
             HttpContext.Session.SetString("NombreCompleto", "");
-
+            
             return RedirectToAction("Index"); 
         }
 
@@ -55,13 +55,15 @@ namespace CarritoMVC.Controllers
             {
                 HttpContext.Session.SetString("EmpleadoId", queryEmpleado.EmpleadoId.ToString());
                 HttpContext.Session.SetString("NombreCompleto", queryEmpleado.NombreCompleto);
-               
-                   
+                HttpContext.Session.SetString("Admin", true.ToString());
+
+
                 return RedirectToAction("Index", "Productos");
             }else if(queryCliente != null && queryEmpleado == null)
             {
                 HttpContext.Session.SetString("ClienteId", queryCliente.ClienteId.ToString());
                 HttpContext.Session.SetString("NombreCompleto", queryCliente.NombreCompleto);
+                HttpContext.Session.SetString("Admin", false.ToString());
                 //ViewBag.nombreUsuario = HttpContext.Session.GetString("nombreCompleto");
                 return RedirectToAction("Index");
             }
