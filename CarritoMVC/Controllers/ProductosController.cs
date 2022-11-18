@@ -20,10 +20,10 @@ namespace CarritoMVC.Controllers
         }
 
         // GET: Productos
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-            var carritoContext = _context.Productos.Include(p => p.Categoria);
-            return View(await carritoContext.ToListAsync());
+            ViewBag.productos = _context.Productos.Include(p => p.Categoria);
+            return View();
         }
 
         public ActionResult ProductosXCategoria(int id)
@@ -65,7 +65,7 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductoId,CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado")] Producto producto)
+        public async Task<IActionResult> Create([Bind("CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado")] Producto producto)
         {
             if (ModelState.IsValid)
             {

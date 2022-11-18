@@ -35,7 +35,11 @@ img {
 }
 .main-header__link {
   color: #333;
+  font-size: 8px;
+  margin-bottom: 0px !important;
 }
+
+
 
 /* Estilos del Menu */
 .main-nav {
@@ -398,9 +402,7 @@ img {
     margin: 0;
     border-bottom: 1px solid #ccc;
   }
-  .main-header__link {
-    margin-bottom: 20px;
-  }
+ 
   .main-header__btn{
     width: 130px;
     padding: 10px;

@@ -45,7 +45,7 @@
     <div class="container">
         <h2 class="main-title">Nuevos Productos (puede no estar)</h2>
         <section class="container-products">
-            @foreach (Producto item in Model) {
+            @foreach (Producto item in ViewBag.productos) {
                 <div class="product">
                     <img src="img/pantalon.jpg" alt="" class="product__img">
                     <div class="product__description">

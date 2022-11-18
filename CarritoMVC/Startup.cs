@@ -1,4 +1,5 @@
 ﻿using CarritoMVC.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarritoMVC
@@ -12,8 +13,16 @@ namespace CarritoMVC
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder); //Lo configuramos, con sus respectivos servicios
 
+            //Nuevo
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
             var app = builder.Build(); //Sobre esta app, configuraremos luego los middleware
+            app.UseSession();
             Configure(app); //Configuramos los middlewaere
+
 
             return app; //Retornamos la App ya inicializada.
         }
@@ -22,7 +31,14 @@ namespace CarritoMVC
             // Add services to the container.
             builder.Services.AddDbContext<CarritoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CarritoDBCS")));
             builder.Services.AddControllersWithViews();
+            
         }
+
+        //private static void ConfigureServices(IServiceCollection services)
+        //{
+        //    services.AddSession();
+        //    services.AddMvc();
+        //}
 
         private static void Configure(WebApplication app)
         {
@@ -40,6 +56,9 @@ namespace CarritoMVC
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            //app.UseSession();
+
 
             app.MapControllerRoute(
                 name: "default",

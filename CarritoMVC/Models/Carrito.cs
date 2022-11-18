@@ -24,5 +24,18 @@ namespace CarritoMVC.Models
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public double SubTotal { get; set; }
 
+        public Carrito(int carritoId, int clienteId, Cliente cliente, bool activo, double subTotal)
+        {
+            CarritoId = carritoId;
+            ClienteId = clienteId;
+            Cliente = cliente;
+            CarritoItems = new List<CarritoItem>();
+            Activo = activo;
+            SubTotal = subTotal;
+        }
+        public Carrito()
+        {
+
+        }
     }
 }

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using System.Xml.Linq;
+
 
 namespace CarritoMVC.Controllers
 {
@@ -19,11 +22,11 @@ namespace CarritoMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
 
-            var carritoContext = _context.Productos.Include(p => p.Categoria).Where(p => p.Destacado.Equals(true));
-            return View(await carritoContext.ToListAsync());
+            ViewBag.productos = _context.Productos.Include(p => p.Categoria).Where(p => p.Destacado.Equals(true));
+            return View();
         }
 
         public async Task<IActionResult> Tienda()
@@ -33,13 +36,16 @@ namespace CarritoMVC.Controllers
             return View(await carritoContext.ToListAsync());
         }
 
-        
-
-        public ActionResult Logueo(String email, String password)
+        public IActionResult cerrarSesion()
         {
-            //string queryEmpleado = (from c in _context.Empleados
-            //                where c.Email == Email && c.Password == Password
-            //                        select c.NombreCompleto).FirstOrDefault();
+            HttpContext.Session.SetString("EmpleadoId", "0");
+            HttpContext.Session.SetString("NombreCompleto", "");
+
+            return RedirectToAction("Index"); 
+        }
+
+        public IActionResult Logueo(String email, String password)
+        {
             var queryEmpleado = _context.Empleados.Where(e => e.Email.Equals(email) && e.Password.Equals(password)).FirstOrDefault();
 
             var queryCliente = _context.Clientes.Where(e => e.Email.Equals(email) && e.Password.Equals(password)).FirstOrDefault();
@@ -47,9 +53,16 @@ namespace CarritoMVC.Controllers
            
             if ((queryEmpleado != null && queryCliente == null) || (queryEmpleado != null && queryCliente != null))
             {
+                HttpContext.Session.SetString("EmpleadoId", queryEmpleado.EmpleadoId.ToString());
+                HttpContext.Session.SetString("NombreCompleto", queryEmpleado.NombreCompleto);
+               
+                   
                 return RedirectToAction("Index", "Productos");
             }else if(queryCliente != null && queryEmpleado == null)
             {
+                HttpContext.Session.SetString("ClienteId", queryCliente.ClienteId.ToString());
+                HttpContext.Session.SetString("NombreCompleto", queryCliente.NombreCompleto);
+                //ViewBag.nombreUsuario = HttpContext.Session.GetString("nombreCompleto");
                 return RedirectToAction("Index");
             }
             return View("Login");
