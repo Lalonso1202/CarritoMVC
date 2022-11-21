@@ -3,22 +3,31 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .titulo-carritos {
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
 
-<h1>Index</h1>
+    .descripcion {
+        text-align: center;
+        font-size: 25px;
+        font-weight: 800;
+    }
+</style>
+<h1 class="titulo-carritos">Nuestras carritos</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Cliente)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Activo)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.SubTotal)
             </th>
             <th></th>
@@ -36,10 +45,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SubTotal)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CarritoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CarritoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CarritoId">Delete</a>
+            <td> 
+              <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CarritoId">Eliminar</a>
             </td>
         </tr>
 }

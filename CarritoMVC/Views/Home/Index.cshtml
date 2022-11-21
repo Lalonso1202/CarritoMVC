@@ -53,7 +53,7 @@
                         <h3>Categoria: @Html.DisplayFor(modelItem => item.Categoria.Descripcion)</h3>
                         <span class="product__price">$ @Html.DisplayFor(modelItem => item.PrecioVigente)</span>
                     </div>
-                    <i class="product__icon fas fa-cart-plus"></i>
+                    <a asp-controller="Productos" asp-action="Details" asp-route-id="@item.ProductoId"><i class="product__icon fas fa-cart-plus"></i></a>
                 </div>
           }
         </section>

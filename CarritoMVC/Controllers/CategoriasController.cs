@@ -34,31 +34,7 @@ namespace CarritoMVC.Controllers
              
         }
 
-        // GET: Categorias/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (Login())
-            {
-                if (id == null || _context.Categorias == null)
-                {
-                    return NotFound();
-                }
-
-                var categoria = await _context.Categorias
-                    .FirstOrDefaultAsync(m => m.CategoriaId == id);
-                if (categoria == null)
-                {
-                    return NotFound();
-                }
-
-                return View(categoria);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            
-        }
+        
 
         // GET: Categorias/Create
         public IActionResult Create()

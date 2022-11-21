@@ -4,9 +4,17 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<style>
+    .titulo-cliente {
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+</style>
+<h1 class="titulo-cliente">Detalles</h1>
 
-<div>
+<center>
+ <div>
     <h4>Empleado</h4>
     <hr />
     <dl class="row">
@@ -61,6 +69,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.EmpleadoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.EmpleadoId">Editar</a> |
+        <a class="btn btn-outline-success" asp-action="Index">Volver a la lista de empleados</a>
 </div>
+</center>

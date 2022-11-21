@@ -7,8 +7,10 @@ namespace CarritoMVC.Models
     public class Producto
     {
         public int ProductoId { get; set; }
+        
         public int CategoriaId { get; set; }
-        public Categoria Categoria { get; set; }
+        [Key]
+        public Categoria? Categoria { get; set; }
         public String Imagen { get; set; }
 
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7GVWYM/6+e7j3QpbfnmraqDHPjN4FGzQ0kAiEqi8nHg=",
+  "Hash": "1OF/tSYVagRJHlB4GeKEqtkEpbAddVPHYSc5UjijhJY=",
   "Source": "CarritoMVC",
   "BasePath": "_content/CarritoMVC",
   "Mode": "Default",
@@ -867,23 +867,6 @@
       "OriginalItemSpec": "wwwroot\\img\\camisa manga corta.jpg"
     },
     {
-      "Identity": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\wwwroot\\img\\camisa.jpg",
-      "SourceId": "CarritoMVC",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\wwwroot\\",
-      "BasePath": "_content/CarritoMVC",
-      "RelativePath": "img/camisa.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\camisa.jpg"
-    },
-    {
       "Identity": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\wwwroot\\img\\fb.png",
       "SourceId": "CarritoMVC",
       "SourceType": "Discovered",
@@ -1069,6 +1052,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\producto.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\wwwroot\\img\\Remera1.jpg",
+      "SourceId": "CarritoMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\wwwroot\\",
+      "BasePath": "_content/CarritoMVC",
+      "RelativePath": "img/Remera1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Remera1.jpg"
     },
     {
       "Identity": "C:\\Users\\agusk\\OneDrive\\Escritorio\\CarritoPNT1\\CarritoMVC\\wwwroot\\img\\tw.png",

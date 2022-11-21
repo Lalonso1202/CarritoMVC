@@ -58,7 +58,7 @@ namespace CarritoMVC.Controllers
                 HttpContext.Session.SetString("Admin", true.ToString());
 
 
-                return RedirectToAction("Index", "Productos");
+                return RedirectToAction("Index", "Backoffice");
             }else if(queryCliente != null && queryEmpleado == null)
             {
                 HttpContext.Session.SetString("ClienteId", queryCliente.ClienteId.ToString());

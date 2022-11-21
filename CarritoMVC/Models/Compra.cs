@@ -11,7 +11,7 @@ namespace CarritoMVC.Models
         public int CompraId { get; set; }
 
        
-        public Carrito Carrito { get; set; }
+        public Carrito? Carrito { get; set; }
        
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]

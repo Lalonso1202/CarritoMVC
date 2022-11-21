@@ -9,10 +9,12 @@ namespace CarritoMVC.Models
     {
         
         public int CarritoItemId { get; set; }
-        public Producto Producto { get; set; }
 
-        [Required(ErrorMessage = ErrorMsgs.Requerido)]
-        public double ValorUnitario { get; set; }
+      
+        public Producto? Producto { get; set; }
+
+        //[Required(ErrorMessage = ErrorMsgs.Requerido)]
+        //public double ValorUnitario { get; set; }
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public int Cantidad { get; set; }
@@ -20,6 +22,6 @@ namespace CarritoMVC.Models
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public int Subtotal { get; set; }
 
-       
+        
     }
 }

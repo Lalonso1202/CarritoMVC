@@ -62,15 +62,27 @@ namespace CarritoMVC.Controllers
         // GET: Empleados/Create
         public IActionResult Create()
         {
-            if (Login())
-            {
+            //if (Login())
+            //{
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
            
+        }
+
+        public Boolean yaExiste(String email)
+        {
+            Boolean existe = false;
+            var queryEmpleado = _context.Empleados.Where(e => e.Email.Equals(email)).FirstOrDefault();
+            if (queryEmpleado != null)
+            {
+                existe = true;
+            }
+
+            return existe;
         }
 
         // POST: Empleados/Create
@@ -80,20 +92,31 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmpleadoId,Telefono,Direccion,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Empleado empleado)
         {
-            if (Login())
-            {
+            //if (Login())
+            //{
                 if (ModelState.IsValid)
                 {
-                    _context.Add(empleado);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if (!yaExiste(empleado.Email))
+                    {
+                        HttpContext.Session.SetString("EmpleadoId", empleado.EmpleadoId.ToString());
+                        HttpContext.Session.SetString("NombreCompleto", empleado.NombreCompleto);
+                        HttpContext.Session.SetString("Admin", true.ToString());
+                        _context.Add(empleado);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        ViewBag.Msg = "Ya se encuentra registrado ese mail";
+                        return View("Create");
+                    }
                 }
                 return View(empleado);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
            
         }
 

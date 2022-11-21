@@ -1,0 +1,64 @@
+﻿@model Categoria
+@{
+}
+
+
+<style>
+    /*Backoffice*/
+    .titulo-backoffice {
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+    .fila{
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+</style>
+
+<main class="main">
+    <div class="container">
+    <h1 class="titulo-backoffice">Sección de administración del sistema</h1>
+       <div class="row fila">
+           <div class="col-lg-4 col-xs-6">
+                <center>
+               <h1>Productos</h1>
+                <a class="btn btn-outline-secondary" asp-controller="Productos" asp-action="Index">Ver Productos</a>
+                <a class="btn btn-outline-secondary" asp-controller="Productos" asp-action="Create">Crear Productos</a>
+                </center>
+           </div>
+            <div class="col-lg-4 col-xs-6">
+                <center>
+                    <h1>Categorias</h1>
+                    <a class="btn btn-outline-secondary" asp-controller="Categorias" asp-action="Index">Ver Categorias</a>
+                    <a class="btn btn-outline-secondary" asp-controller="Categorias" asp-action="Create">Crear Categorias</a>
+                  
+                </center>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+                <center>
+                    <h1>Clientes</h1>
+                    <a class="btn btn-outline-secondary" asp-controller="Clientes" asp-action="Index">Ver Clientes</a>
+                </center>
+            </div>
+       </div>
+       <br />
+        <div class="row fila">
+            <div class="col-lg-4 col-xs-6">
+                <center>
+                    <h1>Empleados</h1>
+                    <a class="btn btn-outline-secondary" asp-controller="Empleados" asp-action="Index">Ver Empleados</a>
+                    <a class="btn btn-outline-secondary" asp-controller="Empleados" asp-action="Create">Crear Empleados</a>
+                </center>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+                <center>
+                    <h1>Carritos</h1>
+                    <a class="btn btn-outline-secondary" asp-controller="Carritos" asp-action="Index">Ver Carritos</a>
+                </center>
+            </div>
+           
+        </div>
+    </div>
+</main>

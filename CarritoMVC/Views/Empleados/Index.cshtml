@@ -3,37 +3,50 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .titulo-empleados {
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
 
-<h1>Index</h1>
+    .descripcion {
+        text-align: center;
+        font-size: 25px;
+        font-weight: 800;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    .boton-detalles{
+        margin-bottom:10px;
+    }
+</style>
+<h1 class="titulo-empleados">Nuestros empleados</h1>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Telefono)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Dni)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.FechaAlta)
             </th>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Password)
             </th>
             <th></th>
@@ -41,37 +54,37 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaAlta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmpleadoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmpleadoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmpleadoId">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Dni)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.FechaAlta)
+                </td>
+                <td class="descripcion">
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a class="btn btn-success boton-detalles" asp-action="Details" asp-route-id="@item.EmpleadoId">Detalles</a>
+                    
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EmpleadoId">Eliminar</a>
+                </td>
+            </tr>
 }
     </tbody>
 </table>

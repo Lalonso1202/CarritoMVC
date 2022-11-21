@@ -28,7 +28,7 @@ namespace CarritoMVC.Controllers
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (Login())
+            if (Login() && devolverSessionId().Equals(id.ToString()))
             {
                 if (id == null || _context.Clientes == null)
                 {
@@ -49,6 +49,17 @@ namespace CarritoMVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
+        }
+
+        public String devolverSessionId()
+        {
+            String clienteId = "";
+            if (Login())
+            {
+                clienteId = HttpContext.Session.GetString("ClienteId").ToString();
+            }
+
+            return clienteId;
         }
 
         // GET: Clientes/Create
