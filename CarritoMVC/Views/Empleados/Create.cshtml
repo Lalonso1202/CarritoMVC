@@ -61,8 +61,11 @@
     </div>
 </div>
 
-<div>
-    <a class="btn btn-outline-success" asp-action="Index">Volver a la lista de empleados</a>
-</div>
+    @if (Context.Session.GetString("Admin") == true.ToString())
+    {
+        <div>
+            <a class="btn btn-outline-success" asp-action="Index">Volver a la lista de empleados</a>
+        </div>
+    }
 
 </center>

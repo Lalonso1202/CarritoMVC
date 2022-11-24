@@ -48,7 +48,13 @@ namespace CarritoMVC.Models
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
+        [Required]
 
-       
+        public int Telefono { get; set; }
+
+        [Required(ErrorMessage = ErrorMsgs.Requerido)]
+        public String Direccion { get; set; }
+
+
     }
 }

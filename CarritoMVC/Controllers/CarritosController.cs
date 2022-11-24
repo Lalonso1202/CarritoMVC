@@ -44,7 +44,11 @@ namespace CarritoMVC.Controllers
 
             return View(carrito);
         }
-
+        public ActionResult miCarrito(int idCliente) 
+        {
+            ViewBag.carrito = _context.Carritos.Include(p => p.Cliente).Where(p => p.ClienteId.Equals(idCliente));
+            return View();
+        }
         // GET: Carritos/Create
         public IActionResult Create()
         {

@@ -13,10 +13,10 @@
         nombreCompleto = Context.Session.GetString("NombreCompleto").ToString();
     }
     if (valorAdmin == true.ToString()){
-        admin = Context.Session.GetString("Admin").ToString();
-        idEmpleado = Context.Session.GetString("EmpleadoId");
+        admin = valorAdmin.ToString();
+        idEmpleado = valorIdEmpleado;
     }else{
-        idCliente = Context.Session.GetString("ClienteId");
+        idCliente = valorIdCliente;
     }
     
 }

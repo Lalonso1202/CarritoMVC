@@ -77,14 +77,26 @@ namespace CarritoMVC.Controllers
         {
             Boolean existe = false;
             var queryEmpleado = _context.Empleados.Where(e => e.Email.Equals(email)).FirstOrDefault();
-            if (queryEmpleado != null)
+            var queryCliente = _context.Clientes.Where(e => e.Email.Equals(email)).FirstOrDefault();
+            if (queryEmpleado != null || queryCliente != null)
             {
                 existe = true;
             }
 
             return existe;
         }
+       
 
+        public String devolverSessionId(String email)
+        {
+            String empleadoId = _context.Empleados.First(v => v.Email.Equals(email)).EmpleadoId.ToString();
+            if (Login())
+            {
+                empleadoId = HttpContext.Session.GetString("EmpleadoId").ToString();
+            }
+
+            return empleadoId;
+        }
         // POST: Empleados/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -98,12 +110,18 @@ namespace CarritoMVC.Controllers
                 {
                     if (!yaExiste(empleado.Email))
                     {
-                        HttpContext.Session.SetString("EmpleadoId", empleado.EmpleadoId.ToString());
+                        
+                        
                         HttpContext.Session.SetString("NombreCompleto", empleado.NombreCompleto);
+                        HttpContext.Session.SetString("Email", empleado.Email);
                         HttpContext.Session.SetString("Admin", true.ToString());
+
                         _context.Add(empleado);
+
                         await _context.SaveChangesAsync();
+                        HttpContext.Session.SetString("EmpleadoId", devolverSessionId(empleado.Email));
                         return RedirectToAction(nameof(Index));
+                        
                     }
                     else
                     {
@@ -218,7 +236,7 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (Login())
+            if (Login() && HttpContext.Session.GetString("Admin").Equals(true.ToString()))
             {
                 if (_context.Empleados == null)
                 {
@@ -228,6 +246,25 @@ namespace CarritoMVC.Controllers
                 if (empleado != null)
                 {
                     _context.Empleados.Remove(empleado);
+
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else if (Login() && HttpContext.Session.GetString("Admin").Equals(false.ToString()))
+            {
+                if (_context.Empleados == null)
+                {
+                    return Problem("Entity set 'CarritoContext.Empleados'  is null.");
+                }
+                var empleado = await _context.Empleados.FindAsync(id);
+                if (empleado != null)
+                {
+                    _context.Empleados.Remove(empleado);
+                    HttpContext.Session.SetString("EmpleadoId", "0");
+                    HttpContext.Session.SetString("NombreCompleto", "");
+                    HttpContext.Session.SetString("Admin", false.ToString());
                 }
 
                 await _context.SaveChangesAsync();

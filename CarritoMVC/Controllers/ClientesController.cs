@@ -22,13 +22,21 @@ namespace CarritoMVC.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Clientes.ToListAsync());
+            if (Login() && HttpContext.Session.GetString("Admin").Equals(true.ToString()))
+            {
+                return View(await _context.Clientes.ToListAsync());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (Login() && devolverSessionId().Equals(id.ToString()))
+            if (Login() && devolverSessionId(HttpContext.Session.GetString("Email")).Equals(id.ToString()) || HttpContext.Session.GetString("Admin").Equals(true.ToString()))
             {
                 if (id == null || _context.Clientes == null)
                 {
@@ -51,9 +59,9 @@ namespace CarritoMVC.Controllers
             
         }
 
-        public String devolverSessionId()
+        public String devolverSessionId(String email)
         {
-            String clienteId = "";
+            String clienteId = _context.Clientes.First(v => v.Email.Equals(email)).ClienteId.ToString();
             if (Login())
             {
                 clienteId = HttpContext.Session.GetString("ClienteId").ToString();
@@ -79,12 +87,21 @@ namespace CarritoMVC.Controllers
             {
                 if (!yaExiste(cliente.Email))
                 {
-                    HttpContext.Session.SetString("ClienteId", cliente.ClienteId.ToString());
+                    
+                   
                     HttpContext.Session.SetString("NombreCompleto", cliente.NombreCompleto);
+                    HttpContext.Session.SetString("Email", cliente.Email);
                     HttpContext.Session.SetString("Admin", false.ToString());
                     _context.Add(cliente);
+                    Carrito miCarrito = new Carrito();
+                    miCarrito.Activo = true;
+                    miCarrito.Cliente = cliente;
+                    miCarrito.SubTotal = 0;
+
+                    _context.Carritos.Add(miCarrito);
 
                     await _context.SaveChangesAsync();
+                    HttpContext.Session.SetString("ClienteId", devolverSessionId(cliente.Email));
                     return RedirectToAction(nameof(Index));
                 }
                 else
@@ -100,7 +117,8 @@ namespace CarritoMVC.Controllers
         {
             Boolean existe = false;
             var queryCliente = _context.Clientes.Where(e => e.Email.Equals(email)).FirstOrDefault();
-            if(queryCliente != null)
+            var queryEmpleado = _context.Empleados.Where(e => e.Email.Equals(email)).FirstOrDefault();
+            if (queryCliente != null || queryEmpleado != null)
             {
                 existe = true;
             }
@@ -205,7 +223,7 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (Login())
+            if (Login() && HttpContext.Session.GetString("Admin").Equals(true.ToString()))
             {
                 if (_context.Clientes == null)
                 {
@@ -215,10 +233,31 @@ namespace CarritoMVC.Controllers
                 if (cliente != null)
                 {
                     _context.Clientes.Remove(cliente);
+                   
                 }
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else if(Login() && HttpContext.Session.GetString("Admin").Equals(false.ToString()))
+            {
+                if (_context.Clientes == null)
+                {
+                    return Problem("Entity set 'CarritoContext.Clientes'  is null.");
+                }
+                var cliente = await _context.Clientes.FindAsync(id);
+                if (cliente != null)
+                {
+                    _context.Clientes.Remove(cliente);
+                    HttpContext.Session.SetString("EmpleadoId", "0");
+                    HttpContext.Session.SetString("NombreCompleto", "");
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+
+
             }
             else
             {
@@ -227,10 +266,11 @@ namespace CarritoMVC.Controllers
            
         }
 
+       
         public bool Login()
         {
             bool l;
-            if (HttpContext.Session.GetString("ClienteId") != null)
+            if (HttpContext.Session.GetString("ClienteId") != null || HttpContext.Session.GetString("EmpleadoId") != null)
             {
                 l = true;
             }

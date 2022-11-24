@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarritoMVC.Migrations
 {
     [DbContext(typeof(CarritoContext))]
-    [Migration("20221121060639_CarritoMVC")]
+    [Migration("20221122023721_CarritoMVC")]
     partial class CarritoMVC
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

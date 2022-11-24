@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "Login";
 }
-<h1 style="text-align:center">Iniciar sesión en la tienda</h1>
+<h1 style="text-align:center; padding-top: 70px;">Iniciar sesión en la tienda</h1>
 
 <div class="container">
     <center>
@@ -23,7 +23,17 @@
             <button type="submit" class="btn btn-primary">Submit</button>
             <br />
         </form>
-        <a asp-controller="Clientes" asp-action="Create">Si aun no estas registrado, hacelo aqui!</a>
+
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <a class="btn btn-outline-dark" asp-controller="Clientes" asp-action="Create">Registrarse como cliente!</a>
+            </div>
+            <div class="col-lg-6">
+                <a class="btn btn-outline-dark" asp-controller="Empleados" asp-action="Create">Registrarse como empleado!</a>
+            </div>
+        </div>
+        
         
     </center>
 </div>

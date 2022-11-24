@@ -12,12 +12,7 @@ namespace CarritoMVC.Models
         public int ClienteId { get; set; }
        
 
-        [Required]
-        //[Phone]
-        public int Telefono { get; set; }
-
-        [Required(ErrorMessage = ErrorMsgs.Requerido)]
-        public String Direccion { get; set; }
+       
 
 
     }

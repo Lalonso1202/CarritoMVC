@@ -44,6 +44,14 @@ namespace CarritoMVC.Controllers
             return RedirectToAction("Index"); 
         }
 
+        //public ActionResult agregarACarrito(Producto producto, int cantidad, double subtotal, int carritoId) 
+        //{
+        //    CarritoItem miCarritoItem = new CarritoItem();
+        //    miCarritoItem.productoId = producto.ProductoId;
+        //    miCarritoItem.Cantidad = cantidad;
+        //    miCarritoItem.Subtotal = (int)(producto.PrecioVigente * cantidad);
+        //    miCarritoItem.
+        //}
         public IActionResult Logueo(String email, String password)
         {
             var queryEmpleado = _context.Empleados.Where(e => e.Email.Equals(email) && e.Password.Equals(password)).FirstOrDefault();
