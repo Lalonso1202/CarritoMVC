@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarritoMVC.Data;
 using CarritoMVC.Models;
+using System.Security.Policy;
 
 namespace CarritoMVC.Controllers
 {
@@ -31,6 +32,63 @@ namespace CarritoMVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+        }
+        public String devolverSessionId(String email)
+        {
+            String clienteId = _context.Clientes.First(v => v.Email.Equals(email)).ClienteId.ToString();
+            if (Login() && clienteId != null)
+            {
+                clienteId = HttpContext.Session.GetString("ClienteId").ToString();
+            }
+
+            return clienteId;
+        }
+
+        public IActionResult MiCarrito()
+        {
+            if (Login())
+            {
+                
+                int idCarrito = 0;
+                String clienteId = HttpContext.Session.GetString("ClienteId").ToString();
+                ViewBag.carritoId = _context.Carritos.FromSqlRaw("Select * from Carritos where ClienteId =" + clienteId);
+                foreach (Carrito c in ViewBag.carritoId)
+                {
+                    idCarrito = c.CarritoId;
+                }
+
+                var carritoItemList = _context.CarritoItems.Where(Ci => Ci.carritoId.Equals(idCarrito)).Include(p => p.Producto).Include(p => p.Producto.Categoria);
+                
+                
+
+                return View(carritoItemList.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+        }
+
+        
+        public async Task<IActionResult> EliminarDelCarrito(int id)
+        {
+            if (Login())
+            {
+
+                var itemCarrito = await _context.CarritoItems.FindAsync(id);
+                if(itemCarrito != null)
+                {
+                    _context.CarritoItems.Remove(itemCarrito);
+                }
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("MiCarrito","Clientes");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
         }
 
         // GET: Clientes/Details/5
@@ -59,16 +117,7 @@ namespace CarritoMVC.Controllers
             
         }
 
-        public String devolverSessionId(String email)
-        {
-            String clienteId = _context.Clientes.First(v => v.Email.Equals(email)).ClienteId.ToString();
-            if (Login())
-            {
-                clienteId = HttpContext.Session.GetString("ClienteId").ToString();
-            }
-
-            return clienteId;
-        }
+        
 
         // GET: Clientes/Create
         public IActionResult Create()
@@ -112,6 +161,45 @@ namespace CarritoMVC.Controllers
                
             }
             return RedirectToAction("Home","Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AgregarAlCarrito([Bind("ProductoId,CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado,Cantidad")] Producto producto)
+        {
+            if (Login())
+            {
+                if (ModelState.IsValid)
+                {
+                    String clienteId = HttpContext.Session.GetString("ClienteId").ToString();
+                    ViewBag.carritoId = _context.Carritos.FromSqlRaw("Select * from Carritos where ClienteId =" + clienteId);
+                        
+                    //Producto p = (Producto)_context.Productos.Where(c => c.ProductoId == carritoItem.productoId);
+                    CarritoItem cItem = new CarritoItem();
+                    cItem.productoId = producto.ProductoId;
+
+                    //String cantidad = cItem.Cantidad.ToString();
+
+                    cItem.Cantidad = producto.Cantidad;
+                    
+                    cItem.Subtotal = (int)(producto.PrecioVigente * cItem.Cantidad);
+                    foreach(Carrito c in ViewBag.carritoId)
+                    {
+                        cItem.carritoId = c.CarritoId;
+                    }
+                    
+                    _context.Add(cItem);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                //ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
         }
         public Boolean yaExiste(String email)
         {

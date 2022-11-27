@@ -25,13 +25,13 @@ namespace CarritoMVC.Controllers
         public ActionResult Index()
         {
 
-            ViewBag.productos = _context.Productos.Include(p => p.Categoria).Where(p => p.Destacado.Equals(true));
+            ViewBag.productos = _context.Productos.Include(p => p.Categoria).Where(p => p.Destacado.Equals(true)).Where(p => p.Activo.Equals(true)).Take(8).OrderByDescending(p => p.Nombre);
             return View();
         }
 
         public async Task<IActionResult> Tienda()
         {
-            var carritoContext = _context.Productos.Include(p => p.Categoria).Where(p => p.Destacado.Equals(true));
+            var carritoContext = _context.Productos.Include(p => p.Categoria).Where(p => p.Activo.Equals(true));
             ViewBag.categorias = _context.Categorias.ToList();
             return View(await carritoContext.ToListAsync());
         }
@@ -64,6 +64,7 @@ namespace CarritoMVC.Controllers
                 HttpContext.Session.SetString("EmpleadoId", queryEmpleado.EmpleadoId.ToString());
                 HttpContext.Session.SetString("NombreCompleto", queryEmpleado.NombreCompleto);
                 HttpContext.Session.SetString("Admin", true.ToString());
+                HttpContext.Session.SetString("Email", email);
 
 
                 return RedirectToAction("Index", "Backoffice");
@@ -72,6 +73,7 @@ namespace CarritoMVC.Controllers
                 HttpContext.Session.SetString("ClienteId", queryCliente.ClienteId.ToString());
                 HttpContext.Session.SetString("NombreCompleto", queryCliente.NombreCompleto);
                 HttpContext.Session.SetString("Admin", false.ToString());
+                HttpContext.Session.SetString("Email", email);
                 //ViewBag.nombreUsuario = HttpContext.Session.GetString("nombreCompleto");
                 return RedirectToAction("Index");
             }

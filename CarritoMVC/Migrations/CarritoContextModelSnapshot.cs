@@ -57,20 +57,20 @@ namespace CarritoMVC.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarritoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Subtotal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("carritoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productoId")
                         .HasColumnType("int");
 
                     b.HasKey("CarritoItemId");
 
-                    b.HasIndex("CarritoId");
+                    b.HasIndex("carritoId");
 
-                    b.HasIndex("ProductoId");
+                    b.HasIndex("productoId");
 
                     b.ToTable("CarritoItems");
                 });
@@ -90,6 +90,33 @@ namespace CarritoMVC.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categorias");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoriaId = 1,
+                            Descripcion = "Remeras"
+                        },
+                        new
+                        {
+                            CategoriaId = 2,
+                            Descripcion = "Buzos"
+                        },
+                        new
+                        {
+                            CategoriaId = 3,
+                            Descripcion = "Shorts"
+                        },
+                        new
+                        {
+                            CategoriaId = 4,
+                            Descripcion = "Pantalones largos"
+                        },
+                        new
+                        {
+                            CategoriaId = 5,
+                            Descripcion = "Deportiva"
+                        });
                 });
 
             modelBuilder.Entity("CarritoMVC.Models.Cliente", b =>
@@ -210,6 +237,9 @@ namespace CarritoMVC.Migrations
                     b.Property<bool>("Activo")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
@@ -252,15 +282,21 @@ namespace CarritoMVC.Migrations
 
             modelBuilder.Entity("CarritoMVC.Models.CarritoItem", b =>
                 {
-                    b.HasOne("CarritoMVC.Models.Carrito", null)
+                    b.HasOne("CarritoMVC.Models.Carrito", "carrito")
                         .WithMany("CarritoItems")
-                        .HasForeignKey("CarritoId");
+                        .HasForeignKey("carritoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CarritoMVC.Models.Producto", "Producto")
                         .WithMany()
-                        .HasForeignKey("ProductoId");
+                        .HasForeignKey("productoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Producto");
+
+                    b.Navigation("carrito");
                 });
 
             modelBuilder.Entity("CarritoMVC.Models.Compra", b =>

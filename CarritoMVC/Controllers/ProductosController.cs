@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarritoMVC.Data;
 using CarritoMVC.Models;
+using System.Security.Policy;
 
 namespace CarritoMVC.Controllers
 {
@@ -38,6 +39,7 @@ namespace CarritoMVC.Controllers
         {
             ViewBag.categoria = _context.Categorias.Where(c => c.CategoriaId == id);
             ViewBag.productosXCategoria = _context.Productos.Include(p => p.Categoria).Where(p => p.CategoriaId.Equals(id));
+            ViewBag.categorias = _context.Categorias.ToList();
 
             return View();
         }
@@ -81,7 +83,7 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado")] Producto producto)
+        public async Task<IActionResult> Create([Bind("CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado,Cantidad")] Producto producto)
         {
             if (Login())
             {
@@ -100,6 +102,8 @@ namespace CarritoMVC.Controllers
             }
            
         }
+
+       
 
         // GET: Productos/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -132,7 +136,7 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado,Cantidad")] Producto producto)
         {
             if (Login())
             {

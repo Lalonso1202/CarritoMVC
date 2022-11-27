@@ -43,17 +43,18 @@
 
 <main class="main">
     <div class="container">
-        <h2 class="main-title">Nuevos Productos (puede no estar)</h2>
+        <h2 class="main-title">Nuestros productos destacados</h2>
         <section class="container-products">
             @foreach (Producto item in ViewBag.productos) {
                 <div class="product">
-                    <img src="img/pantalon.jpg" alt="" class="product__img">
+                   
+                    <img class="product__img" src="@Url.Content("img/" + item.Imagen)" />
                     <div class="product__description">
                         <h3 class="product__title">Datos del producto @Html.DisplayFor(modelItem => item.Nombre)</h3>
                         <h3>Categoria: @Html.DisplayFor(modelItem => item.Categoria.Descripcion)</h3>
                         <span class="product__price">$ @Html.DisplayFor(modelItem => item.PrecioVigente)</span>
                     </div>
-                    <a asp-controller="Productos" asp-action="Details" asp-route-id="@item.ProductoId"><i class="product__icon fas fa-cart-plus"></i></a>
+                    <a asp-controller="Productos" asp-action="Details" asp-route-id="@item.ProductoId"><i class="product__icon fa-sharp fa-solid fa-eye"></i></a>
                 </div>
           }
         </section>

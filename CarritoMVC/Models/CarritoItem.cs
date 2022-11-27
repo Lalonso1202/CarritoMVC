@@ -23,6 +23,10 @@ namespace CarritoMVC.Models
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public int Subtotal { get; set; }
 
+        public int carritoId { get; set; }
+        public Carrito? carrito { get; set; }
+
+
         
     }
 }

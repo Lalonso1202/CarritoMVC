@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CarritoMVC.Models.CarritoItem>
+@{
+    ViewData["Title"] = "Index";
+    String foto = "";
+    int contador = 0;
+    double acumPrecio = 0;
+    double valor = 0;
+}
+<style>
+    .titulo-productos {
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+
+    .descripcion {
+        text-align: center;
+        font-size: 25px;
+        font-weight: 800;
+    }
+</style>
+
+<h1 class="titulo-productos">Mi Carrito</h1>
+
+    <div class="container">
+
+        @foreach (CarritoItem item in Model)
+        {
+                contador++;
+               
+                valor = item.Producto.PrecioVigente * item.Cantidad;
+                acumPrecio += valor;
+                <div class="row">
+                    <div class="col-lg-2">
+                    <img src="@Url.Content("../../img/" + item.Producto.Imagen)" />
+                    </div>
+                    <div class="col-lg-6">
+                    <h2 style="text-align:center"><b>@Html.DisplayFor(modelItem => item.Producto.Nombre)</b></h2>
+                    </div>
+                    <div class="col-lg-2">
+                        <h3>Cantidad: @Html.DisplayFor(modelItem => item.Cantidad)</h3>
+                    </div>
+                    <div class="col-lg-2">
+                        <h3>$ @valor</h3>
+                    </div>
+                <a asp-controller="Clientes" asp-action="EliminarDelCarrito" asp-route-id="@item.CarritoItemId">Eliminar</a>
+                </div>
+                <br />
+        }
+        @if (contador == 0)
+        {
+            <h1 style="text-align:center">No hay productos en el carrito</h1>
+        }
+        <hr />
+
+        <h2 style="text-align:right">Precio total: $ @acumPrecio</h2>
+        <br />
+        <br />
+
+        
+
+
+   
+    
+        
+        
+    </div>

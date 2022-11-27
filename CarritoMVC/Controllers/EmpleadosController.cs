@@ -245,31 +245,25 @@ namespace CarritoMVC.Controllers
                 var empleado = await _context.Empleados.FindAsync(id);
                 if (empleado != null)
                 {
-                    _context.Empleados.Remove(empleado);
-
+                    if (HttpContext.Session.GetString("EmpleadoId") == id.ToString())
+                    {
+                        HttpContext.Session.Remove("EmpleadoId");
+                        HttpContext.Session.Remove("NombreCompleto");
+                        HttpContext.Session.Remove("Admin");
+                        _context.Empleados.Remove(empleado);
+                        
+                    }
+                    else
+                    {
+                        _context.Empleados.Remove(empleado);
+                    }
+                    
                 }
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            else if (Login() && HttpContext.Session.GetString("Admin").Equals(false.ToString()))
-            {
-                if (_context.Empleados == null)
-                {
-                    return Problem("Entity set 'CarritoContext.Empleados'  is null.");
-                }
-                var empleado = await _context.Empleados.FindAsync(id);
-                if (empleado != null)
-                {
-                    _context.Empleados.Remove(empleado);
-                    HttpContext.Session.SetString("EmpleadoId", "0");
-                    HttpContext.Session.SetString("NombreCompleto", "");
-                    HttpContext.Session.SetString("Admin", false.ToString());
-                }
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+           
             else
             {
                 return RedirectToAction("Index", "Home");

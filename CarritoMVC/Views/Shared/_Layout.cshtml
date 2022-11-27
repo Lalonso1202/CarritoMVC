@@ -71,12 +71,13 @@
                         </button>
                         <ul class="dropdown-menu">
                             @if(admin == true.ToString()){
-                                <li><a class="dropdown-item" asp-controller="Empleados" asp-action="Details" asp-route-id="@idEmpleado"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                                <li><a class="dropdown-item" asp-controller="Empleados" asp-action="Details" asp-route-id="@valorIdEmpleado"><i class="fas fa-user"></i> Mi Perfil</a></li>
                             }else{
-                                <li><a class="dropdown-item" asp-controller="Clientes" asp-action="Details" asp-route-id="@idCliente"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                                <li><a class="dropdown-item" asp-controller="Clientes" asp-action="Details" asp-route-id="@valorIdCliente"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                                <li><a class="dropdown-item" asp-controller="Clientes" asp-action="MiCarrito"><i class="fa-solid fa-cart-shopping"></i> Mi Carrito </a></li>
                             }
+
                             
-                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-cart-shopping"></i> Mi Carrito </a></li>
                             <li><a class="dropdown-item" asp-controller="Home" asp-action="cerrarSesion"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>

@@ -26,5 +26,9 @@ namespace CarritoMVC.Models
         public double PrecioVigente { get; set; }
         public Boolean Activo { get; set; }
         public Boolean Destacado { get; set; }
+
+        public int Cantidad { get; set; }
+
+        
     }
 }
