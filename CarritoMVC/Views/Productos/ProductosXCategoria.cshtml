@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CarritoMVC.Models.Producto
+@{
+}
+
+<main class="main">
+    <div class="container">
+        @foreach (Categoria c in ViewBag.categorias)
+        {
+            <a asp-controller="Productos" asp-action="ProductosXCategoria" asp-route-id="@c.CategoriaId"> @Html.DisplayFor(modelItem => c.Descripcion)</a>
+
+        }
+       
+        @foreach (Categoria item in ViewBag.categoria)
+        {
+            <h2 class="main-title">Productos del tipo  @Html.DisplayFor(modelItem => item.Descripcion)</h2>
+        }
+       
+        <section class="container-products">
+            @foreach (Producto item in ViewBag.productosXCategoria)
+            {
+                <div class="product">
+                    <img class="product__img" src="@Url.Content("/img/" + item.Imagen)" />
+                    <div class="product__description">
+                        <h3 class="product__title">Datos del producto @Html.DisplayFor(modelItem => item.Nombre)</h3>
+                       @* <h3>Categoria: @Html.DisplayFor(modelItem => item.Categoria.Descripcion)</h3>*@
+                        <span class="product__price">$ @Html.DisplayFor(modelItem => item.PrecioVigente)</span>
+                    </div>
+                    <a asp-controller="Productos" asp-action="Details" asp-route-id="@item.ProductoId"><i class="product__icon fa-sharp fa-solid fa-eye"></i></a>
+                </div>
+            }
+        </section>
+    </div>
+</main>

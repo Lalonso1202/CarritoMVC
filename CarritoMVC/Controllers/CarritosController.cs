@@ -22,7 +22,8 @@ namespace CarritoMVC.Controllers
         // GET: Carritos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Carritos.ToListAsync());
+            var carritoContext = _context.Carritos.Include(c => c.Cliente);
+            return View(await carritoContext.ToListAsync());
         }
 
         // GET: Carritos/Details/5
@@ -34,7 +35,8 @@ namespace CarritoMVC.Controllers
             }
 
             var carrito = await _context.Carritos
-                .FirstOrDefaultAsync(m => m.IdCarrito == id);
+                .Include(c => c.Cliente)
+                .FirstOrDefaultAsync(m => m.CarritoId == id);
             if (carrito == null)
             {
                 return NotFound();
@@ -42,10 +44,15 @@ namespace CarritoMVC.Controllers
 
             return View(carrito);
         }
-
+        public ActionResult miCarrito(int idCliente) 
+        {
+            ViewBag.carrito = _context.Carritos.Include(p => p.Cliente).Where(p => p.ClienteId.Equals(idCliente));
+            return View();
+        }
         // GET: Carritos/Create
         public IActionResult Create()
         {
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "Apellido");
             return View();
         }
 
@@ -54,7 +61,7 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCarrito,Activo,SubTotal")] Carrito carrito)
+        public async Task<IActionResult> Create([Bind("CarritoId,ClienteId,Activo,SubTotal")] Carrito carrito)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +69,7 @@ namespace CarritoMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "Apellido", carrito.ClienteId);
             return View(carrito);
         }
 
@@ -78,17 +86,20 @@ namespace CarritoMVC.Controllers
             {
                 return NotFound();
             }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "Apellido", carrito.ClienteId);
             return View(carrito);
         }
+
+        
 
         // POST: Carritos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCarrito,Activo,SubTotal")] Carrito carrito)
+        public async Task<IActionResult> Edit(int id, [Bind("CarritoId,ClienteId,Activo,SubTotal")] Carrito carrito)
         {
-            if (id != carrito.IdCarrito)
+            if (id != carrito.CarritoId)
             {
                 return NotFound();
             }
@@ -102,7 +113,7 @@ namespace CarritoMVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CarritoExists(carrito.IdCarrito))
+                    if (!CarritoExists(carrito.CarritoId))
                     {
                         return NotFound();
                     }
@@ -113,6 +124,7 @@ namespace CarritoMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "Apellido", carrito.ClienteId);
             return View(carrito);
         }
 
@@ -125,7 +137,8 @@ namespace CarritoMVC.Controllers
             }
 
             var carrito = await _context.Carritos
-                .FirstOrDefaultAsync(m => m.IdCarrito == id);
+                .Include(c => c.Cliente)
+                .FirstOrDefaultAsync(m => m.CarritoId == id);
             if (carrito == null)
             {
                 return NotFound();
@@ -155,7 +168,7 @@ namespace CarritoMVC.Controllers
 
         private bool CarritoExists(int id)
         {
-          return _context.Carritos.Any(e => e.IdCarrito == id);
+          return _context.Carritos.Any(e => e.CarritoId == id);
         }
     }
 }

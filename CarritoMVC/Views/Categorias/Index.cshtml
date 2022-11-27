@@ -3,16 +3,25 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .titulo-categorias{
+        text-align:center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
 
-<h1>Index</h1>
+    .descripcion{
+        text-align: center;
+        font-size:25px;
+        font-weight: 800;
+    }
+</style>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1 class="titulo-categorias">Nuestras categorias de productos</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="descripcion">
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th></th>
@@ -21,13 +30,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td class="descripcion">
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Nombre">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Nombre">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Nombre">Delete</a>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.CategoriaId">Editar</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CategoriaId">Eliminar</a>
             </td>
         </tr>
 }

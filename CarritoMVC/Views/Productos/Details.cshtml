@@ -1,42 +1,69 @@
-@model CarritoMVC.Models.Producto
+﻿@model CarritoMVC.Models.Producto
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Details";
+    
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Producto</h4>
+
+<div class="container">
+    <h4> @Html.DisplayFor(model => model.Categoria.Descripcion)</h4>
+    
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioVigente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecioVigente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Activo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activo)
-        </dd>
-    </dl>
+    <div class="row">
+       <div class="col-lg-6">
+            @*<img src="@Url.Content("../img/" + Model.Imagen)/>
+            *@
+           
+            <img src="@Url.Content("../../img/" + Model.Imagen)" />
+       </div>
+        <div class="col-lg-6">
+            @if (Context.Session.GetString("Admin") == true.ToString()){
+                <h2>@Html.DisplayFor(model => model.Nombre)</h2>
+                <h2>Precio: $ @Html.DisplayFor(model => model.PrecioVigente)</h2>
+            }else{
+                <h2>@Html.DisplayFor(model => model.Nombre)</h2>
+                <h2>@Html.DisplayFor(model => model.PrecioVigente)</h2>
+                <form asp-action="AgregarAlCarrito" asp-controller="Clientes">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ProductoId" />
+                    <input type="hidden" asp-for="CategoriaId" />
+                    <input type="hidden" asp-for="Imagen" />
+                    <input type="hidden" asp-for="Nombre" />
+                    <input type="hidden" asp-for="Descripcion" />
+                    <input type="hidden" asp-for="PrecioVigente" />
+                    <input type="hidden" asp-for="Activo" />
+                    <input type="hidden" asp-for="Destacado" />
+                    <select class="form-select" asp-for="Cantidad">
+                        <option selected value="1">1 unidad</option>
+                        <option value="2">2 unidades</option>
+                        <option value="3">3 unidades</option>
+                        <option value="4">4 unidades</option>
+                    </select>
+                    <div class="form-group">
+
+
+                        <br />
+                        <input type="submit" value="Agregar al carrito" class="btn btn-primary" />
+                    </div>
+                </form>
+            }
+            
+            
+           
+        </div>
+       
+        
+    </div>
+    
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdCategoria">Edit</a> |
+@if (Context.Session.GetString("Admin") == true.ToString()){
+    <div>
+    <a asp-action="Edit" asp-route-id="@Model?.ProductoId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+}

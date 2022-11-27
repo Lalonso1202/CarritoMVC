@@ -35,14 +35,20 @@ img {
 }
 .main-header__link {
   color: #333;
+  font-size: 15px;
+  margin-bottom: 0px !important;
 }
 
+
+#tit-cat{
+    text-align:center !important;
+}
 /* Estilos del Menu */
 .main-nav {
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.5s;
-  z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+    z-index: 999999;
 }
 .menu{
   position: absolute;
@@ -229,6 +235,10 @@ img {
   color: #FF4E00;
   font-weight: bold;
 }
+.product__category {
+    color: #FF4E00;
+    font-weight: bold;
+}
 .product__icon {
   display: block;
   margin-top: 10px;
@@ -394,9 +404,7 @@ img {
     margin: 0;
     border-bottom: 1px solid #ccc;
   }
-  .main-header__link {
-    margin-bottom: 20px;
-  }
+ 
   .main-header__btn{
     width: 130px;
     padding: 10px;

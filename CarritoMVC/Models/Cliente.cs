@@ -7,24 +7,12 @@ namespace CarritoMVC.Models
 {
     public class Cliente : Usuario
     {   //Como declarar un constructor con herencia en C#?
-        public Cliente(int id, string nombre, string email, string password) : base(id, nombre, email, password)
-        {
-        }
+        
 
-        [ForeignKey("CarritoId")]
-        [Display(Name = Alias.CarritoId)]
-        public int CarritoId { get; set; }
+        public int ClienteId { get; set; }
+       
 
-        public Carrito Carrito { get; set; }
-
-        //public List<Compra> Compra { get; set; }
-
-        [Required]
-        [Phone]
-        public int Telefono { get; set; }
-
-        [Required(ErrorMessage = ErrorMsgs.Requerido)]
-        public String Direccion { get; set; }
+       
 
 
     }

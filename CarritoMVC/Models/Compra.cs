@@ -7,25 +7,16 @@ namespace CarritoMVC.Models
 {
     public class Compra
     {
-        [Key]
-        [Display(Name = Alias.CompraId)]
-        public int IdCompra { get; set; }
+       
+        public int CompraId { get; set; }
 
-        [ForeignKey("CarritoId")]
-        [Display(Name = Alias.CarritoId)]
-        public int IdCarrito { get; set; }
-
-        public Carrito Carrito { get; set; }
-        //public Cliente Cliente { get; set; }
+       
+        public Carrito? Carrito { get; set; }
+       
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public double Total { get; set; }
 
-        public Compra(int idCompra, int idCarrito, double total)
-        {
-            this.IdCompra = idCompra;
-            this.IdCarrito = idCarrito;
-            this.Total = total;
-        }
+       
     }
 }

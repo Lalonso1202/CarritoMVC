@@ -1,80 +1,108 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    String nombreCompleto = null;
+    String admin = null;
+    String idCliente = null;
+    String idEmpleado = null;
+    var valor = Context.Session.GetString("NombreCompleto");
+    var valorAdmin = Context.Session.GetString("Admin");
+    var valorIdEmpleado = Context.Session.GetString("EmpleadoId");
+    var valorIdCliente = Context.Session.GetString("ClienteId");
+    if (valor != null)
+    {
+        nombreCompleto = Context.Session.GetString("NombreCompleto").ToString();
+    }
+    if (valorAdmin == true.ToString()){
+        admin = valorAdmin.ToString();
+        idEmpleado = valorIdEmpleado;
+    }else{
+        idCliente = valorIdCliente;
+    }
+    
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CarritoMVC</title>
+    <title>Tienda Online</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CarritoMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="/js/site.js"></script>
+    <link rel="stylesheet" href="/css/estilos.css">
+    <link href="Content/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
 </head>
 <body>
-    <!--
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CarritoMVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                        </li>
-                    </ul>
+    
+    
+    <header class="main-header">
+            <div class="container container--flex">
+                <div class="main-header__container">
+                    <h1 class="main-header__title">MI TIENDA DE ROPA</h1>
+               
+                    <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+                    <nav class="main-nav" id="main-nav">
+                        <ul class="menu">
+                            <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
+                            <li class="menu__item"><a href="/Home#sobreNosotros" class="menu__link">SOBRE NOSOTROS</a></li>
+                            <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Tienda" class="menu__link">TIENDA</a></li>
+                            <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="main-header__container">
+                    <span class="main-header__txt">Necesitas Ayuda?</span>
+                    <p class="main-header__txt"><i class="fas fa-phone"></i> Contactarse con 12345678099</p>
+                </div>
+                <div class="main-header__container">
+                @if (nombreCompleto != "" && nombreCompleto != null)
+                {
+                   
+                    <div class="dropdown">
+                        <button style="margin-bottom: 20px" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             @nombreCompleto
+                        </button>
+                        <ul class="dropdown-menu">
+                            @if(admin == true.ToString()){
+                                <li><a class="dropdown-item" asp-controller="Empleados" asp-action="Details" asp-route-id="@valorIdEmpleado"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                            }else{
+                                <li><a class="dropdown-item" asp-controller="Clientes" asp-action="Details" asp-route-id="@valorIdCliente"><i class="fas fa-user"></i> Mi Perfil</a></li>
+                                <li><a class="dropdown-item" asp-controller="Clientes" asp-action="MiCarrito"><i class="fa-solid fa-cart-shopping"></i> Mi Carrito </a></li>
+                            }
+
+                            
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="cerrarSesion"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                   @*<a asp-area="" asp-controller="" asp-action="" class="main-header__link"><i style="font-size: 15px;" class="fas fa-user"></i></a>*@
+                }else{
+                    <a asp-area="" asp-controller="Home" asp-action="Login" class="main-header__link"><i style="font-size: 18px" class="fas fa-user"></i></a>
+                }
+                    
+                   
                 </div>
             </div>
-        </nav>
-    </header>
-    -->
-    <meta charset="UTF-8">
-    <title>Tienda Online</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="/css/estilos.css">
-    <script src="/js/site.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-   
-    <header class="main-header">
-        <div class="container container--flex">
-            <div class="main-header__container">
-                <h1 class="main-header__title">MI TIENDA DE ROPA</h1>
-                <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
-                <nav class="main-nav" id="main-nav">
-                    <ul class="menu">
-                    <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
-                        <li class="menu__item"><a href="/Home#sobreNosotros" class="menu__link">SOBRE NOSOTROS</a></li>
-                    <li class="menu__item"><a asp-area="" asp-controller="Productos" asp-action="Index" class="menu__link">TIENDA</a></li>
-                        <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="main-header__container">
-                <span class="main-header__txt">Necesitas Ayuda?</span>
-                <p class="main-header__txt"><i class="fas fa-phone"></i> Contactarse con 12345678099</p>
-            </div>
-            <div class="main-header__container">
-                <a href="" class="main-header__link"><i class="fas fa-user"></i></a>
-                <a href="" class="main-header__btn">Mi Carrito <i class="fa-solid fa-cart-shopping"></i></a>
-            </div>
-        </div>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+        </header>
         <div class="container">
-            &copy; 2022 - CarritoMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - CarritoMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

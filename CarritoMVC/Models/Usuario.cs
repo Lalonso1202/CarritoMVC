@@ -7,13 +7,7 @@ namespace CarritoMVC.Models
 {
     public abstract class Usuario
     {
-        [Key]
-        //[NotMapped]
-        public int Id { get; set; }
-
-
-        //public Cliente Cliente { get; set; }
-        //public Empleado Empleado { get; set; }
+       
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         [StringLength(100, MinimumLength = 2, ErrorMessage = ErrorMsgs.StrMaxMin)]
@@ -54,14 +48,13 @@ namespace CarritoMVC.Models
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
+        [Required]
 
-        public Usuario(int id, string nombre, string email, string password)
-        {
-            this.Id = id;
-            this.Nombre = nombre;
-            this.Email = email;
-            this.FechaAlta = DateTime.Now;
-            this.Password = password;
-        }
+        public int Telefono { get; set; }
+
+        [Required(ErrorMessage = ErrorMsgs.Requerido)]
+        public String Direccion { get; set; }
+
+
     }
 }

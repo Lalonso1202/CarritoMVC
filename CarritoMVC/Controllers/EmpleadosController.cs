@@ -22,63 +22,144 @@ namespace CarritoMVC.Controllers
         // GET: Empleados
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Empleados.ToListAsync());
+            if (Login())
+            {
+                return View(await _context.Empleados.ToListAsync());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+              
         }
 
         // GET: Empleados/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Empleados == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Empleados == null)
+                {
+                    return NotFound();
+                }
 
-            var empleado = await _context.Empleados
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (empleado == null)
+                var empleado = await _context.Empleados
+                    .FirstOrDefaultAsync(m => m.EmpleadoId == id);
+                if (empleado == null)
+                {
+                    return NotFound();
+                }
+
+                return View(empleado);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(empleado);
+            
         }
 
         // GET: Empleados/Create
         public IActionResult Create()
         {
-            return View();
+            //if (Login())
+            //{
+                return View();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+           
         }
 
+        public Boolean yaExiste(String email)
+        {
+            Boolean existe = false;
+            var queryEmpleado = _context.Empleados.Where(e => e.Email.Equals(email)).FirstOrDefault();
+            var queryCliente = _context.Clientes.Where(e => e.Email.Equals(email)).FirstOrDefault();
+            if (queryEmpleado != null || queryCliente != null)
+            {
+                existe = true;
+            }
+
+            return existe;
+        }
+       
+
+        public String devolverSessionId(String email)
+        {
+            String empleadoId = _context.Empleados.First(v => v.Email.Equals(email)).EmpleadoId.ToString();
+            if (Login())
+            {
+                empleadoId = HttpContext.Session.GetString("EmpleadoId").ToString();
+            }
+
+            return empleadoId;
+        }
         // POST: Empleados/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Telefono,Direccion,Id,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("EmpleadoId,Telefono,Direccion,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Empleado empleado)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(empleado);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(empleado);
+            //if (Login())
+            //{
+                if (ModelState.IsValid)
+                {
+                    if (!yaExiste(empleado.Email))
+                    {
+                        
+                        
+                        HttpContext.Session.SetString("NombreCompleto", empleado.NombreCompleto);
+                        HttpContext.Session.SetString("Email", empleado.Email);
+                        HttpContext.Session.SetString("Admin", true.ToString());
+
+                        _context.Add(empleado);
+
+                        await _context.SaveChangesAsync();
+                        HttpContext.Session.SetString("EmpleadoId", devolverSessionId(empleado.Email));
+                        return RedirectToAction(nameof(Index));
+                        
+                    }
+                    else
+                    {
+                        ViewBag.Msg = "Ya se encuentra registrado ese mail";
+                        return View("Create");
+                    }
+                }
+                return View(empleado);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+           
         }
 
         // GET: Empleados/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Empleados == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Empleados == null)
+                {
+                    return NotFound();
+                }
 
-            var empleado = await _context.Empleados.FindAsync(id);
-            if (empleado == null)
-            {
-                return NotFound();
+                var empleado = await _context.Empleados.FindAsync(id);
+                if (empleado == null)
+                {
+                    return NotFound();
+                }
+                return View(empleado);
             }
-            return View(empleado);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // POST: Empleados/Edit/5
@@ -86,52 +167,68 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Telefono,Direccion,Id,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("EmpleadoId,Telefono,Direccion,Nombre,Apellido,Dni,Email,FechaAlta,Password")] Empleado empleado)
         {
-            if (id != empleado.Id)
+            if (Login())
             {
-                return NotFound();
+                if (id != empleado.EmpleadoId)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(empleado);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!EmpleadoExists(empleado.EmpleadoId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(empleado);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(empleado);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmpleadoExists(empleado.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(empleado);
         }
 
         // GET: Empleados/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Empleados == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Empleados == null)
+                {
+                    return NotFound();
+                }
 
-            var empleado = await _context.Empleados
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (empleado == null)
+                var empleado = await _context.Empleados
+                    .FirstOrDefaultAsync(m => m.EmpleadoId == id);
+                if (empleado == null)
+                {
+                    return NotFound();
+                }
+
+                return View(empleado);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(empleado);
+           
         }
 
         // POST: Empleados/Delete/5
@@ -139,23 +236,58 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Empleados == null)
+            if (Login() && HttpContext.Session.GetString("Admin").Equals(true.ToString()))
             {
-                return Problem("Entity set 'CarritoContext.Empleados'  is null.");
+                if (_context.Empleados == null)
+                {
+                    return Problem("Entity set 'CarritoContext.Empleados'  is null.");
+                }
+                var empleado = await _context.Empleados.FindAsync(id);
+                if (empleado != null)
+                {
+                    if (HttpContext.Session.GetString("EmpleadoId") == id.ToString())
+                    {
+                        HttpContext.Session.Remove("EmpleadoId");
+                        HttpContext.Session.Remove("NombreCompleto");
+                        HttpContext.Session.Remove("Admin");
+                        _context.Empleados.Remove(empleado);
+                        
+                    }
+                    else
+                    {
+                        _context.Empleados.Remove(empleado);
+                    }
+                    
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var empleado = await _context.Empleados.FindAsync(id);
-            if (empleado != null)
+           
+            else
             {
-                _context.Empleados.Remove(empleado);
+                return RedirectToAction("Index", "Home");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
         }
 
         private bool EmpleadoExists(int id)
         {
-          return _context.Empleados.Any(e => e.Id == id);
+          return _context.Empleados.Any(e => e.EmpleadoId == id);
+        }
+
+        public bool Login()
+        {
+            bool l;
+            if (HttpContext.Session.GetString("EmpleadoId") != null && HttpContext.Session.GetString("Admin") == true.ToString())
+            {
+                l = true;
+            }
+            else
+            {
+                l = false;
+            }
+            return l;
         }
     }
 }

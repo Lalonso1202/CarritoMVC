@@ -4,18 +4,21 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<style>
+    .titulo-cliente {
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+</style>
+<h1 class="titulo-cliente">Detalles</h1>
+
+<center>
 
 <div>
     <h4>Cliente</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Carrito)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Carrito.IdCarrito)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Telefono)
         </dt>
@@ -67,6 +70,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.ClienteId">Editar</a> |
+    <a class="btn btn-outline-success" asp-action="Index">Volver a la lista de clientes</a>
 </div>
+</center>

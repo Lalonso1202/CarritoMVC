@@ -3,10 +3,17 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<style>
+    .titulo-categorias {
+        text-align: center;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+</style>
+<h1 class="titulo-categorias">Eliminar categorias</h1>
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<center>
 <div>
     <h4>Categoria</h4>
     <hr />
@@ -20,8 +27,9 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Nombre" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="hidden" asp-for="CategoriaId" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a class="btn btn-outline-success" asp-action="Index">Volver a la lista de categorias</a>
     </form>
 </div>
+</center>

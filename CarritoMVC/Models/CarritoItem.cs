@@ -7,18 +7,15 @@ namespace CarritoMVC.Models
 {
     public class CarritoItem
     {
-        [Key]
-        [Display(Name = Alias.CarritoItemId)]
-        public int IdCarritoItem { get; set; }
+        
+        public int CarritoItemId { get; set; }
 
-        [ForeignKey("ProductoId")]
-        [Display(Name = Alias.ProductoId)]
-        public int IdProducto { get; set; }
+      
+        public int productoId { get; set; }
+        public Producto? Producto { get; set; }
 
-        public Producto Producto { get; set; }
-
-        [Required(ErrorMessage = ErrorMsgs.Requerido)]
-        public double ValorUnitario { get; set; }
+        //[Required(ErrorMessage = ErrorMsgs.Requerido)]
+        //public double ValorUnitario { get; set; }
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public int Cantidad { get; set; }
@@ -26,13 +23,10 @@ namespace CarritoMVC.Models
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public int Subtotal { get; set; }
 
-        //public CarritoItem(int idCarritoItem, int idProducto, double valorUnitario, int cantidad)
-        //{
-        //    this.IdCarritoItem = idCarritoItem;
-        //    this.IdProducto = idProducto;
-        //    this.ValorUnitario = valorUnitario;
-        //    this.Cantidad = cantidad;
-        //    this.Subtotal = (int)(valorUnitario * cantidad);
-        //}
+        public int carritoId { get; set; }
+        public Carrito? carrito { get; set; }
+
+
+        
     }
 }

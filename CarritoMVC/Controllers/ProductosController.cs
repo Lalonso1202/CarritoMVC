@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarritoMVC.Data;
 using CarritoMVC.Models;
+using System.Security.Policy;
 
 namespace CarritoMVC.Controllers
 {
@@ -20,11 +21,27 @@ namespace CarritoMVC.Controllers
         }
 
         // GET: Productos
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-              return _context.Productos != null ? 
-                          View(await _context.Productos.ToListAsync()) :
-                          Problem("Entity set 'CarritoContext.Productos'  is null.");
+            if (Login())
+            {
+                ViewBag.productos = _context.Productos.Include(p => p.Categoria);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+        }
+
+        public ActionResult ProductosXCategoria(int id)
+        {
+            ViewBag.categoria = _context.Categorias.Where(c => c.CategoriaId == id);
+            ViewBag.productosXCategoria = _context.Productos.Include(p => p.Categoria).Where(p => p.CategoriaId.Equals(id));
+            ViewBag.categorias = _context.Categorias.ToList();
+
+            return View();
         }
 
         // GET: Productos/Details/5
@@ -36,7 +53,8 @@ namespace CarritoMVC.Controllers
             }
 
             var producto = await _context.Productos
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
+                .Include(p => p.Categoria)
+                .FirstOrDefaultAsync(m => m.ProductoId == id);
             if (producto == null)
             {
                 return NotFound();
@@ -48,7 +66,16 @@ namespace CarritoMVC.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            return View();
+            if (Login())
+            {
+                ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Descripcion");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // POST: Productos/Create
@@ -56,31 +83,52 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,Nombre,Descripcion,PrecioVigente,Activo")] Producto producto)
+        public async Task<IActionResult> Create([Bind("CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado,Cantidad")] Producto producto)
         {
-            if (ModelState.IsValid)
+            if (Login())
             {
-                _context.Add(producto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(producto);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
+                return View(producto);
             }
-            return View(producto);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
+
+       
 
         // GET: Productos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Productos == null)
+            if (Login())
             {
-                return NotFound();
+                if (id == null || _context.Productos == null)
+                {
+                    return NotFound();
+                }
+
+                var producto = await _context.Productos.FindAsync(id);
+                if (producto == null)
+                {
+                    return NotFound();
+                }
+                ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
+                return View(producto);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
             }
 
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto == null)
-            {
-                return NotFound();
-            }
-            return View(producto);
+           
         }
 
         // POST: Productos/Edit/5
@@ -88,52 +136,70 @@ namespace CarritoMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,Nombre,Descripcion,PrecioVigente,Activo")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,CategoriaId,Imagen,Nombre,Descripcion,PrecioVigente,Activo,Destacado,Cantidad")] Producto producto)
         {
-            if (id != producto.IdCategoria)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id != producto.ProductoId)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(producto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductoExists(producto.IdCategoria))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(producto);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ProductoExists(producto.ProductoId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
+                return View(producto);
             }
-            return View(producto);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Productos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Productos == null)
+            if (Login())
             {
-                return NotFound();
-            }
+                if (id == null || _context.Productos == null)
+                {
+                    return NotFound();
+                }
 
-            var producto = await _context.Productos
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (producto == null)
+                var producto = await _context.Productos
+                    .Include(p => p.Categoria)
+                    .FirstOrDefaultAsync(m => m.ProductoId == id);
+                if (producto == null)
+                {
+                    return NotFound();
+                }
+
+                return View(producto);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(producto);
+           
         }
 
         // POST: Productos/Delete/5
@@ -141,23 +207,45 @@ namespace CarritoMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Productos == null)
+            if (Login())
             {
-                return Problem("Entity set 'CarritoContext.Productos'  is null.");
+                if (_context.Productos == null)
+                {
+                    return Problem("Entity set 'CarritoContext.Productos'  is null.");
+                }
+                var producto = await _context.Productos.FindAsync(id);
+                if (producto != null)
+                {
+                    _context.Productos.Remove(producto);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto != null)
+            else
             {
-                _context.Productos.Remove(producto);
+                return RedirectToAction("Index", "Home");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
         }
 
         private bool ProductoExists(int id)
         {
-          return (_context.Productos?.Any(e => e.IdCategoria == id)).GetValueOrDefault();
+          return _context.Productos.Any(e => e.ProductoId == id);
+        }
+
+        public bool Login()
+        {
+            bool l;
+            if (HttpContext.Session.GetString("EmpleadoId") != null && HttpContext.Session.GetString("Admin") == true.ToString())
+            {
+                l = true;
+            }
+            else
+            {
+                l = false;
+            }
+            return l;
         }
     }
 }

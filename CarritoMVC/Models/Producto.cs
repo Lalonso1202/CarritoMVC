@@ -6,15 +6,13 @@ namespace CarritoMVC.Models
 {
     public class Producto
     {
+        public int ProductoId { get; set; }
+        
+        public int CategoriaId { get; set; }
         [Key]
-        [Display(Name = Alias.CategoriaId)]
-        public int IdCategoria { get; set; }
+        public Categoria? Categoria { get; set; }
+        public String Imagen { get; set; }
 
-        //public StockItem StockItem { get; set; }
-
-        public Categoria Categoria { get; set; }
-
-        //public CarritoItem CarritoItem { get; set; }
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         [StringLength(100, MinimumLength = 2, ErrorMessage = ErrorMsgs.StrMaxMin)]
@@ -26,8 +24,11 @@ namespace CarritoMVC.Models
 
         [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public double PrecioVigente { get; set; }
-
-        [Required(ErrorMessage = ErrorMsgs.Requerido)]
         public Boolean Activo { get; set; }
+        public Boolean Destacado { get; set; }
+
+        public int Cantidad { get; set; }
+
+        
     }
 }
