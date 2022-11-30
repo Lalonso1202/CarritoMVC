@@ -51,9 +51,9 @@
                     <nav class="main-nav" id="main-nav">
                         <ul class="menu">
                             <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Index" class="menu__link">INICIO</a></li>
-                            <li class="menu__item"><a href="/Home#sobreNosotros" class="menu__link">SOBRE NOSOTROS</a></li>
+                            <li class="menu__item"><a href="/Home#sobreNosotros" class="menu__link" style="color: black">SOBRE NOSOTROS</a></li>
                             <li class="menu__item"><a asp-area="" asp-controller="Home" asp-action="Tienda" class="menu__link">TIENDA</a></li>
-                            <li class="menu__item"><a href="" class="menu__link">CONTACTO</a></li>
+                        <li class="menu__item"><a href="#contacto" class="menu__link" style="color: black">CONTACTO</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -96,11 +96,32 @@
             </main>
         </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2022 - CarritoMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
+    <footer class="main-footer" id="contacto">
+        <div class="footer__section">
+            <h2 class="footer__title">Sobre Nosotros</h2>
+            <p class="footer__txt">Curabitur non nulla sit amet nislinit tempus convallis quis ac lectus. lac inia eget consectetur sed, convallis at tellus. Nulla porttitor accumsana tincidunt.</p>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Ubicacion :</h2>
+            <p class="footer__txt">Yatay 240 - CABA </p>
+            <h2 class="footer__title">Contacto</h2>
+            <p class="footer__txt">Whatsapp : +54 011 xxxx xxxx</p>
+            <p class="footer__txt">Email : info@ejemplo.com</p>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Links Rapidos</h2>
+            <a href="" class="footer__link">Inico</a>
+            <a href="" class="footer__link">Sobre Nosotros</a>
+            <a href="" class="footer__link">Tienda</a>
+            <a href="" class="footer__link">Contacto</a>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Suscribite para Recibir Ofertas</h2>
+            <p class="footer__txt">Al suscribirse a nuestra lista de correo, siempre recibirá nuestras últimas noticias y actualizaciones.</p>
+            <input type="email" class="footer__input" placeholder="Enter your email">
+        </div>
+        <p class="copy">© 2022 MI TIENDA DE ROPA. Todos los derechos Reservados</p>
+    </footer>
     
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

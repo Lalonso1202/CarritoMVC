@@ -4,13 +4,23 @@
 @model IEnumerable<CarritoMVC.Models.Producto>
 @{
 }
-
+<link rel="stylesheet" href="/css/estilos.css">
 <main class="main">
     <div class="container">
-        @foreach(Categoria c in ViewBag.categorias){
-            <a asp-controller="Productos" asp-action="ProductosXCategoria" asp-route-id="@c.CategoriaId"> @Html.DisplayFor(modelItem => c.Descripcion)</a>
-            
-        }
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorias de Ropa
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach (Categoria c in ViewBag.categorias)
+                    {
+                       <li> <a asp-controller="Productos" asp-action="ProductosXCategoria" asp-route-id="@c.CategoriaId" class="dropdown-item"> @Html.DisplayFor(modelItem => c.Descripcion)</a></li>
+                    }
+                </ul>
+            </div>
+
+            </div>
+       
         <h2 class="main-title">Todos Nuestros Productos</h2>
         <section class="container-products">
             @foreach (Producto item in Model)

@@ -18,6 +18,10 @@ img {
   display: block;
   width: 100%;
 }
+a{
+    text-decoration: none;
+    
+}
 .main-header {
   padding: 0 20px;
 }
@@ -81,13 +85,31 @@ img {
   visibility: visible;
 }
 
-.icon-menu{
-  font-size: 1.5em;
-  border: 1px solid #454546; 
-  display: block;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-left: auto;
+.btn btn-dark-tienda {
+    font-size: 1.5em;
+    border: 1px solid #454546;
+    display: block;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.btn btn-danger {
+   
+    text-decoration: none;
+    color: white;
+    
+
+    
+}
+
+.icon-menu {
+    font-size: 1.5em;
+    border: 1px solid #454546;
+    display: block;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: auto;
 }
 .main-header__btn{
   display: block;

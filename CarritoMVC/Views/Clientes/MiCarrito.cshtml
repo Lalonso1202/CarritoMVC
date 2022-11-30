@@ -6,6 +6,7 @@
     double acumPrecio = 0;
     double valor = 0;
 }
+<link rel="stylesheet" href="/css/estilos.css">
 <style>
     .titulo-productos {
         text-align: center;
@@ -43,8 +44,12 @@
                     <div class="col-lg-2">
                         <h3>$ @valor</h3>
                     </div>
-                <a asp-controller="Clientes" asp-action="EliminarDelCarrito" asp-route-id="@item.CarritoItemId">Eliminar</a>
-                </div>
+           
+                
+                 </div>
+        <button type="button" class="btn btn-light" style="color: white">
+            <a asp-controller="Clientes" asp-action="EliminarDelCarrito" asp-route-id="@item.CarritoItemId" style="color: red">Eliminar</a>
+        </button>
                 <br />
         }
         @if (contador == 0)
